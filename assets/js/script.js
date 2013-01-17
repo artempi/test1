@@ -12,9 +12,9 @@ jQuery(function(){
 
 	var doc = jQuery(document),
 		canvas = jQuery('#paper'),
-		ctx = canvas[0].getContext('2d'),
-		instructions = jQuery('#instructions');
-
+	instructions = jQuery('#instructions');
+var ctx = canvas[0].getContext('2d');	
+var spessore = jQuery('#spessore').value;
     // Force canvas to dynamically change its size to the same width/height
     // as the browser window.
     canvas[0].width = document.body.clientWidth;
@@ -23,7 +23,8 @@ jQuery(function(){
     // ctx setup
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
-    ctx.lineWidth = 3;
+    ctx.lineWidth =  3;
+
 
 	// Generate an unique ID
 	var id = Math.round(jQuery.now()*Math.random());
@@ -136,11 +137,11 @@ jQuery(function(){
 				'y': e.pageY,
 				'drawing': drawing,
                 'color': color,
-				'id': id
+				'id': id,
+				
 			});
 			lastEmit = jQuery.now();
 		}
-		
 		// Draw a line for the current user's movement, as it is
 		// not received in the socket.on('moving') event above
 		
@@ -153,7 +154,7 @@ jQuery(function(){
 			prev.y = e.pageY;
 		}
 	});
-
+	
 	// Remove inactive clients after 10 seconds of inactivity
     setInterval(function(){
         var totalOnline = 0;
@@ -180,3 +181,4 @@ jQuery(function(){
 	}
 
 });
+
