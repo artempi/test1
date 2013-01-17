@@ -23,7 +23,7 @@ jQuery(function(){
     // ctx setup
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
-    ctx.lineWidth = 10;
+    ctx.lineWidth = 3;
 
 	// Generate an unique ID
 	var id = Math.round(jQuery.now()*Math.random());
