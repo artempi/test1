@@ -15,6 +15,7 @@ jQuery(function(){
 	instructions = jQuery('#instructions');
 var ctx = canvas[0].getContext('2d');	
 var spessore = jQuery('#spessore').value;
+var colorem;
     // Force canvas to dynamically change its size to the same width/height
     // as the browser window.
     canvas[0].width = document.body.clientWidth;
@@ -64,7 +65,7 @@ var spessore = jQuery('#spessore').value;
 			// the previous position of this user's mouse pointer
 
             ctx.strokeStyle = data.color;
-			drawLinerem(clients[data.id].x, clients[data.id].y, data.x, data.y,data.spessremo);
+			drawLinerem(clients[data.id].x, clients[data.id].y, data.x, data.y,data.spessremo,data.color);
 		}
 		
 		// Saving the current client state
@@ -117,7 +118,7 @@ var spessore = jQuery('#spessore').value;
 				'x': e.pageX,
 				'y': e.pageY,
 				'drawing': drawing,
-                'color': document.getElementById('colorpickerField1').value,
+                'color': '#' + document.getElementById('colorpickerField1').value,
 				'id': id,
 				'spessremo' : document.getElementById('spessore').value
 			});
