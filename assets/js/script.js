@@ -33,8 +33,9 @@ var spessore = jQuery('#spessore').value;
     var r = Math.floor(Math.random() * 255) + 70;
     var g = Math.floor(Math.random() * 255) + 70;
     var b = Math.floor(Math.random() * 255) + 70;
-    var color = 'rgb(' + r + ',' + g + ',' + b + ')';
-
+ //   var color = '#' + r +  g + b;
+	var color = '#ffffff';
+	
 	// A flag for drawing activity
 	var drawing = false;
 
@@ -63,7 +64,7 @@ var spessore = jQuery('#spessore').value;
 			// the previous position of this user's mouse pointer
 
             ctx.strokeStyle = data.color;
-			drawLine(clients[data.id].x, clients[data.id].y, data.x, data.y);
+			drawLinerem(clients[data.id].x, clients[data.id].y, data.x, data.y,data.spessremo);
 		}
 		
 		// Saving the current client state
@@ -77,6 +78,22 @@ var spessore = jQuery('#spessore').value;
     // http://ross.posterous.com/2008/08/19/iphone-touch-events-in-javascript/
 
   //  document.addEventListener("touchstart", touchHandler, true);
+  
+  document.addEventListener("blur", cambiacolore(), true);
+	
+	function cambiacolore () {
+  stringacolore =  document.getElementById('colorpickerField1').value;
+ r = stringacolore.charAt(0) + stringacolore.charAt(1);
+ g = stringacolore.charAt(2) + stringacolore.charAt(3);
+  b = stringacolore.charAt(4) + stringacolore.charAt(5);
+	 ctx.strokeStyle = '#' + r +  g + b;
+	 
+ }   
+  
+   document.addEventListener("change", cambiaspessore, true);
+  function cambiaspessore () {
+	   ctx.lineWidth = document.getElementById('spessore').value;	   
+}  
       
 	canvas.on('mousedown', function(e){
 		e.preventDefault();
@@ -100,9 +117,9 @@ var spessore = jQuery('#spessore').value;
 				'x': e.pageX,
 				'y': e.pageY,
 				'drawing': drawing,
-                'color': color,
+                'color': document.getElementById('colorpickerField1').value,
 				'id': id,
-				
+				'spessremo' : document.getElementById('spessore').value
 			});
 			lastEmit = jQuery.now();
 		}
@@ -111,9 +128,8 @@ var spessore = jQuery('#spessore').value;
 		
 		if(drawing){
 
-            ctx.strokeStyle = color;
+            ctx.strokeStyle = document.getElementById('colorpickerField1').value;
 			drawLine(prev.x, prev.y, e.pageX, e.pageY);
-
 			prev.x = e.pageX;
 			prev.y = e.pageY;
 		}
@@ -138,11 +154,23 @@ var spessore = jQuery('#spessore').value;
     },10000);
 
 	function drawLine(fromx, fromy, tox, toy){
+		ctx.strokeStyle = '#'+ document.getElementById('colorpickerField1').value;
+		ctx.lineWidth = document.getElementById('spessore').value;	
         ctx.beginPath();
 		ctx.moveTo(fromx, fromy);
 		ctx.lineTo(tox, toy);
 		ctx.stroke();
 	}
+	
+	function drawLinerem(fromx, fromy, tox, toy,spessore,colorem){
+		ctx.strokeStyle = colorem;
+       ctx.lineWidth = spessore;	
+        ctx.beginPath();
+		ctx.moveTo(fromx, fromy);
+		ctx.lineTo(tox, toy);
+		ctx.stroke();
+	}
+
 
 });
 
