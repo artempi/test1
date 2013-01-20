@@ -11,21 +11,7 @@
           <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 		
-<script type="text/javascript">
-var spessore;
-var color = undefined;
-var red;
-var green;
-var blue;
-function init() {
-var imgcolori = document.getElementById("imgcolori");
- var selcolori = document.getElementById("selcolori");
-  selcolori.style.cursor="crosshair";
-  var ctxcolori = selcolori.getContext("2d");
-  ctxcolori.drawImage(imgcolori,0,0);
-}
 
-</script>
     </head>
     
     <body>
@@ -63,8 +49,18 @@ var imgcolori = document.getElementById("imgcolori");
 		</hgroup>
 		
         <footer>
+				
 	        <h2><i>Source Code:</i> <a href="mailto:vrobbi@libero.it" target='_blank'>send me a mail if you want to customer this app</a></h2>
             <p class='tzine' id='onlineCounter' href=''>Players connected: 0</p>
+<div id="fb-root" style="position:absolute;left:0px;bottom:-10px;width:100px;height:auto;"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "http://connect.facebook.net/it_IT/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href="http://http://vrobbi-nodedrawing.herokuapp.com" data-send="false" data-width="210" data-show-faces="true" data-font="arial"></div>
         </footer>
         
         <!-- JavaScript includes. Notice that socket.io.js is served by node.js -->
@@ -88,6 +84,8 @@ var imgcolori = document.getElementById("imgcolori");
 	$(this).ColorPickerSetColor(this.value);
 });
 		</script> 
+
+		
         
     </body>
 </html>
