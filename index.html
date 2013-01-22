@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html>
     <head>
+<style type="text/css">
+#controlli  {
+position:absolute;
+top:3px;
+left:-285px;
+width:300px;
+height:100px;
+background-color:#ffffff;
+border:1px red solid;
+}
+#controlli:hover  {
+left:0px;
+}
+</style>
         <meta charset="utf-8" />
         <title>Node.js Multiplayer Drawing Game</title>
 
@@ -15,7 +29,10 @@
     </head>
     
     <body>
-<select id="spessore" style="position:absolute;top:3px;left:0px;width:50px;">
+<div id="controlli">	
+<div style="float:left;">
+<button id="cancellalavagna">Pulisci lavagna</button><br />
+<select id="spessore">
   <option value="3" selected="selected">width</option>
   <option value="1">1</option>
 	<option value="2">2</option>
@@ -33,7 +50,15 @@
 <option value="13">14</option>
 <option value="15">15</option>
 </select>	
-<input type="text" value="ffffff" id="colorpickerField1" style="position:absolute;top:30px;left:0px;width:40px;" />
+<input type="text" value="ffffff" id="colorpickerField1" />
+</div>
+<div style="float:right;">
+<div style="padding-bottom:50%;vertical-align:middle;">
+<span style="font-size:30px;font-weight:"600">&gt;&gt;</span>
+</div>
+
+</div>
+</div>
 		<div id="cursors">
 	    	<!-- The mouse pointers will be created here -->
 		</div>
@@ -60,7 +85,7 @@
   js.src = "http://connect.facebook.net/it_IT/all.js#xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<div class="fb-like" data-href="http://http://vrobbi-nodedrawing.herokuapp.com" data-send="false" data-width="210" data-show-faces="true" data-font="arial"></div>
+<div class="fb-like" data-href="http://vrobbi-nodedrawing.herokuapp.com" data-send="false" data-width="210" data-show-faces="true" data-font="arial"></div>
         </footer>
         
         <!-- JavaScript includes. Notice that socket.io.js is served by node.js -->

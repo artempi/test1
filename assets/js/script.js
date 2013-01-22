@@ -13,6 +13,7 @@ jQuery(function(){
 	var doc = jQuery(document),
 		canvas = jQuery('#paper'),
 	instructions = jQuery('#instructions');
+	
 var ctx = canvas[0].getContext('2d');	
 var spessore = jQuery('#spessore').value;
 var colorem;
@@ -29,17 +30,12 @@ var colorem;
 
 	// Generate an unique ID
 	var id = Math.round(jQuery.now()*Math.random());
-
-    //Generate a random color
-    var r = Math.floor(Math.random() * 255) + 70;
-    var g = Math.floor(Math.random() * 255) + 70;
-    var b = Math.floor(Math.random() * 255) + 70;
- //   var color = '#' + r +  g + b;
-	var color = '#ffffff';
-	
+ jQuery('#cancellalavagna').click(function (){
+ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);													  
+});
+   	var color = '#ffffff';
 	// A flag for drawing activity
 	var drawing = false;
-
 	var clients = {};
 	var cursors = {};
 
