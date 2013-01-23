@@ -16,22 +16,35 @@ left:0px;
 }
 </style>
         <meta charset="utf-8" />
-        <title>Node.js Multiplayer Drawing Game</title>
+        <title>Node.js - Multiplayer Drawing Game</title>
 
         <!-- The stylesheets -->
         <link rel="stylesheet" href="assets/css/styles.css" />
-		<link rel="stylesheet" media="screen" type="text/css" href="css/colorpicker.css" />
-        <!--[if lt IE 9]>
+		<link href="js/jquery.minicolors.css" rel="stylesheet">
+		<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+		<script src="js/jquery.minicolors.js"></script>
+		        <!--[if lt IE 9]>
           <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 		
+	<script type="text/javascript">	
+		$(document).ready( function() {
+		
+	$('#minicolore').minicolors(
+	{
+	opacity:true
+	}
+	);				
+	
+	});	
+		</script>
 
     </head>
     
     <body>
 <div id="controlli">	
 <div style="float:left;">
-<button id="cancellalavagna">Pulisci lavagna</button><br />
+<button id="cancellalavagna">Clear deskboard</button><br />
 <select id="spessore">
   <option value="3" selected="selected">width</option>
   <option value="1">1</option>
@@ -50,7 +63,7 @@ left:0px;
 <option value="13">14</option>
 <option value="15">15</option>
 </select>	
-<input type="text" value="ffffff" id="colorpickerField1" />
+<input type="text" class="minicolors" id="minicolore" value="#ffffff" data-opacity="1.0" />
 </div>
 <div style="float:right;">
 <div style="padding-bottom:50%;vertical-align:middle;">
@@ -90,27 +103,7 @@ left:0px;
         
         <!-- JavaScript includes. Notice that socket.io.js is served by node.js -->
 		<script src="/socket.io/socket.io.js"></script>
-		<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
-		<script type="text/javascript" src="js/colorpicker.js"></script>
 		<script src="assets/js/script.js"></script>
 		
-		<script type="text/javascript">
-		
-	$('#colorpickerField1').ColorPicker({
-	onSubmit: function(hsb, hex, rgb, el) {
-		$(el).val(hex);
-		$(el).ColorPickerHide();
-	},
-	onBeforeShow: function () {
-		$(this).ColorPickerSetColor(this.value);
-	}
-})
-.bind('keyup', function(){
-	$(this).ColorPickerSetColor(this.value);
-});
-		</script> 
-
-		
-        
     </body>
 </html>

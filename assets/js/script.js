@@ -76,17 +76,8 @@ ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
 
   //  document.addEventListener("touchstart", touchHandler, true);
   
-  document.addEventListener("blur", cambiacolore(), true);
-	
-	function cambiacolore () {
-  stringacolore =  document.getElementById('colorpickerField1').value;
- r = stringacolore.charAt(0) + stringacolore.charAt(1);
- g = stringacolore.charAt(2) + stringacolore.charAt(3);
-  b = stringacolore.charAt(4) + stringacolore.charAt(5);
-	 ctx.strokeStyle = '#' + r +  g + b;
-	 
- }   
-  
+ // document.addEventListener("blur", cambiacolore(), true);
+		  
    document.addEventListener("change", cambiaspessore, true);
   function cambiaspessore () {
 	   ctx.lineWidth = document.getElementById('spessore').value;	   
@@ -103,18 +94,23 @@ ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
 	});
 	
 	doc.bind('mouseup mouseleave', function(){
+ // alert ($('minicolore').minicolors('rgbaString'));
 		drawing = false;
 	});
 
 	var lastEmit = jQuery.now();
 
 	doc.on('mousemove', function(e){
+								 
 		if(jQuery.now() - lastEmit > 30){
+			
+//	document.getElementById('risultato').innerHTML = $('#minicolore').minicolors('rgbaString');
+			
 			socket.emit('mousemove',{
 				'x': e.pageX,
 				'y': e.pageY,
 				'drawing': drawing,
-                'color': '#' + document.getElementById('colorpickerField1').value,
+                'color': $('#minicolore').minicolors('rgbaString'),
 				'id': id,
 				'spessremo' : document.getElementById('spessore').value
 			});
@@ -125,7 +121,7 @@ ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
 		
 		if(drawing){
 
-            ctx.strokeStyle = document.getElementById('colorpickerField1').value;
+       //     ctx.strokeStyle = document.getElementById('minicolore').value;
 			drawLine(prev.x, prev.y, e.pageX, e.pageY);
 			prev.x = e.pageX;
 			prev.y = e.pageY;
@@ -151,7 +147,7 @@ ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
     },10000);
 
 	function drawLine(fromx, fromy, tox, toy){
-		ctx.strokeStyle = '#'+ document.getElementById('colorpickerField1').value;
+		ctx.strokeStyle = $('#minicolore').minicolors('rgbaString');
 		ctx.lineWidth = document.getElementById('spessore').value;	
         ctx.beginPath();
 		ctx.moveTo(fromx, fromy);
