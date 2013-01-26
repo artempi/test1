@@ -30,6 +30,14 @@ var colorem;
 
 	// Generate an unique ID
 	var id = Math.round(jQuery.now()*Math.random());
+jQuery('#salvafoto').click(function (){
+									 
+var dataURL = canvas[0].toDataURL();
+document.getElementById("canvasimg").src = dataURL;  
+window.open(document.getElementById("canvasimg").src, "toDataURL() image", "width=700, height=700");									
+										  
+});
+
  jQuery('#cancellalavagna').click(function (){
 ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);													  
 });
@@ -94,7 +102,7 @@ ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
 	});
 	
 	doc.bind('mouseup mouseleave', function(){
- // alert ($('minicolore').minicolors('rgbaString'));
+ 
 		drawing = false;
 	});
 
@@ -163,7 +171,7 @@ ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
 		ctx.lineTo(tox, toy);
 		ctx.stroke();
 	}
-
+	
 
 });
 
