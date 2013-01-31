@@ -26,12 +26,34 @@ var colorem;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
     ctx.lineWidth =  3;
-
+ ctx.font = "20px Tahoma";
 
 	// Generate an unique ID
 	var id = Math.round(jQuery.now()*Math.random());
+	
+jQuery('#paper').dblclick(function (e){
+
+if (document.getElementById('scrivi').value.length > 1 ) {
+// ctx.strokeStyle = $('#minicolore').minicolors('rgbaString');
+ ctx.fillStyle = $('#minicolore').minicolors('rgbaString');
+ctx.fillText(document.getElementById('scrivi').value, e.pageX, e.pageY); 
+//document.getElementById('scrivi').value ='';
+
+socket.emit('doppioclick',{
+				'x': e.pageX,
+				'y': e.pageY,
+				'scrivi': document.getElementById('scrivi').value,				
+				'color': $('#minicolore').minicolors('rgbaString'),
+				'id': id,
+				'spessremo' : document.getElementById('spessore').value
+			});
+
+document.getElementById('scrivi').value ='';
+}	
+//document.getElementById("canvasimg").src = dataURL;  
+//window.open(document.getElementById("canvasimg").src, "toDataURL() image", "width=700, height=700");									
+});	
 jQuery('#salvafoto').click(function (){
-									 
 var dataURL = canvas[0].toDataURL();
 document.getElementById("canvasimg").src = dataURL;  
 window.open(document.getElementById("canvasimg").src, "toDataURL() image", "width=700, height=700");									
@@ -47,21 +69,30 @@ ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
 	var clients = {};
 	var cursors = {};
 
-	var socket = io.connect(url);
+	var socket = io.connect(url); 
 	
+ socket.on('doppioclickser', function (data) {
+	// Move the mouse pointer
+	ctx.fillStyle = data.color;
+	ctx.fillText(data.scrivi, data.x, data.y); 
+/*		cursors[data.id].css({
+			'left' : data.x,
+			'top' : data.y
+		});	   */             
+	});		
+ 	
 	socket.on('moving', function (data) {
 		
 		if(! (data.id in clients)){
 			// a new user has come online. create a cursor for them
 			cursors[data.id] = jQuery('<div class="cursor">').appendTo('#cursors');
 		}
-		
-		// Move the mouse pointer
+	// Move the mouse pointer
 		cursors[data.id].css({
 			'left' : data.x,
 			'top' : data.y
 		});
-		
+			
 		// Is the user drawing?
 		if(data.drawing && clients[data.id]){
 			
@@ -172,6 +203,7 @@ ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
 		ctx.stroke();
 	}
 	
+
 
 });
 
