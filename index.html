@@ -11,18 +11,7 @@
 <meta name="keywords" content="lavagna collaborativa, disegnare on line, applicazione real time, multiuser whiteboard, realtime application, drawing on line, drawing game, html5, web 2.0, software, internet" />
 <meta name="description" content="lavagna multiutente condivisa in tempo reale,multiuser whiteboard real time application, draw on line and share your draw with all on the net" />
 <style type="text/css">
-#controlli  {
-position:absolute;
-top:3px;
-left:-285px;
-width:300px;
-height:180px;
-background-color:#ffffff;
-border:1px red solid;
-}
-#controlli:hover  {
-left:0px;
-}
+
 </style>
         <meta charset="utf-8" />
         <title> Multiplayer Drawing Game</title>
@@ -76,11 +65,12 @@ left:0px;
 <button id="salvafoto">Save the draw</button> <br /><br />
 Insert a text <br />
 <input type="text" id="scrivi" size="36" /> <br />
-Double click on the whiteboard where <br />you want to places the text  
+Double click on the whiteboard where <br />you want to places the text<br />or enter if you want to chat
+<div id="testichat"></div>
 </div>
-<div style="float:right;">
+<div id="frecce" onMouseOver="javascript:document.getElementById('frecce').style.backgroundColor ='#ffffff';">
 <div style="padding-bottom:50%;vertical-align:middle;">
-<span style="font-size:30px;font-weight:"600">&gt;&gt;</span>
+<span style="font-size:30px;font-weight:"600">&gt;<br />&gt;<br />&gt;</span>
 </div>
 
 </div>
@@ -101,7 +91,7 @@ Double click on the whiteboard where <br />you want to places the text
 		
         <footer>
 				
-	        <h2><i>Source Code:</i> <a href="mailto:vrobbi@libero.it" target='_blank'>send me a mail if you want to customer this app</a></h2>
+	        <h2><a href="mailto:vrobbi@libero.it" target='_blank'>send me a mail if you want to customer this app</a>&nbsp;&nbsp;&nbsp;<a href="http://www.nuovoweb.eu" target="_blank">www.nuovoweb.eu</a></h2>
             <p class='tzine' id='onlineCounter' href=''>Players connected: 0</p>
 <div id="fb-root" style="position:absolute;left:0px;bottom:-10px;width:100px;height:auto;"></div>
 <script>(function(d, s, id) {

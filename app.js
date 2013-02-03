@@ -58,12 +58,12 @@ socket.on('doppioclick', function (data) {
 		// to everyone except the originating client.
 		socket.broadcast.emit('doppioclickser', data);
 	});	
-	
-	
-	
-	
-	
-	
-	
+
+socket.on('chat', function (data) {
+		
+		// This line sends the event (broadcasts it)
+		// to everyone except the originating client.
+		socket.broadcast.emit('chatser', data);
+	});	
 	
 });

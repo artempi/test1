@@ -66,8 +66,8 @@ h1{
 }
 
 h2{
-	font-size: 13px;
 	font-weight: normal;
+	font-size: 13px;
 	padding-bottom: 8px;
 }
 
@@ -82,15 +82,63 @@ h3{
 	position:relative;
 }
 
-#cursors .cursor{
+#cursors .cursor {
 	position:absolute;
-	width:15px;
+	width:auto;
 	height:22px;
 	background:url('../img/pointer.png') no-repeat -4px 0;
+	font-size:10px;
+}
+
+.cursor .identif{
+background-color:#FFFF00;
+width:auto;
+height:auto;
+margin-top:15px;
+}
+
+#testichat {
+position:relative;
+top:6px;
+left:3px;
+border:1px green solid;
+width:250px;
+height:200px;
+font-size:11px;
+overflow:auto;
+}      
+.testochat  {
+width:100%;
+height:auto;
+}
+
+#frecce {
+float:right;
+background-color:#FFFFFF;
+height:400px;
+}
+
+
+#frecce:hover {
+background-color:#FFFF00;
 }
 
 #paper {
     background-color: #ffffff;
+}
+
+#controlli  {
+position:absolute;
+top:3px;
+left:-285px;
+width:300px;
+height:400px;
+background-color:#ffffff;
+border:1px red solid;
+z-index:10;
+}
+#controlli:hover  {
+left:0px;
 }
 
 /*----------------------------
@@ -138,8 +186,8 @@ footer a i b{
 footer p.tzine{
     color: #999999;
     font-size: 12px;
-    left: 50%;
-    margin: 16px 0 0 110px;
+    left: 80%;
+    margin: 16px 0 0 30px;
     position: absolute;
     text-decoration: none;
     top: 0;
