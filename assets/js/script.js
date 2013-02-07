@@ -18,9 +18,19 @@ var color = '#000000';
 	var drawing = false;
 	var clients = {};
 	var cursors = {};
+	
+	//  funzione richiesta di nick name   
+	
+	var username = '';
+
+if(!username)
+{
+	username = prompt("Hey there, insert your nick name, please", "");
+}
+
+username = username.substr(0,20);	
 
 	var socket = io.connect(url); 
-
 	
 var ctx = canvas[0].getContext('2d');	
 var spessore = jQuery('#spessore').value;
@@ -38,7 +48,7 @@ var colorem;
 
 	// Generate an unique ID
 	var id = Math.round(jQuery.now()*Math.random());
-
+if (username =='')  {username = id }
 jQuery('#scrivi').keypress(function(e){
 var code = e.keyCode;
 if (code == '13') {
@@ -46,7 +56,8 @@ if (code == '13') {
  
  socket.emit('chat',{
 				'testochat': document.getElementById('scrivi').value,				
-				'id': id		
+				'id': id,
+				'usernamerem' : username
 			});
  jQuery('<div class="testochat">ME ' + document.getElementById('scrivi').value +'</div>').appendTo('#testichat');
   document.getElementById('scrivi').value ='';
@@ -94,7 +105,7 @@ ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
   socket.on('chatser', function (data) {
  
 	//alert (data.testochat);
-jQuery('<div class="testochat">' + data.id +' '+ data.testochat +'</div>').appendTo('#testichat');         
+jQuery('<div class="testochat">' + data.usernamerem +' '+ data.testochat +'</div>').appendTo('#testichat');         
 document.getElementById('frecce').style.backgroundColor ='#ffff00';
 	});	
  	
@@ -102,7 +113,7 @@ document.getElementById('frecce').style.backgroundColor ='#ffff00';
 		
 		if(! (data.id in clients)){
 			// a new user has come online. create a cursor for them
-			cursors[data.id] = jQuery('<div class="cursor"><div class="identif">'+ data.id +'</div>').appendTo('#cursors');
+			cursors[data.id] = jQuery('<div class="cursor"><div class="identif">'+ data.usernamerem +'</div>').appendTo('#cursors');
 		}
 	// Move the mouse pointer
 		cursors[data.id].css({
@@ -168,6 +179,7 @@ document.getElementById('frecce').style.backgroundColor ='#ffff00';
 				'drawing': drawing,
                 'color': $('#minicolore').minicolors('rgbaString'),
 				'id': id,
+				'usernamerem' : username,
 				'spessremo' : document.getElementById('spessore').value
 			});
 			lastEmit = jQuery.now();
