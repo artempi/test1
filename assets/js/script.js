@@ -43,7 +43,7 @@ var colorem;
     // ctx setup
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
-    ctx.lineWidth =  3;
+    ctx.lineWidth =  2;
  ctx.font = "20px Tahoma";
 
 	// Generate an unique ID
@@ -63,8 +63,21 @@ if (code == '13') {
   document.getElementById('scrivi').value ='';
 	
 }}
-
 });
+
+jQuery('#salvasulserver').click(function (){
+var dataserver = canvas[0].toDataURL();
+
+socket.emit('salvasulserver',{
+				'id': id,
+				'dataserver': dataserver,
+				'orario':  jQuery.now()
+			});										  
+});
+
+
+
+
 
 jQuery('#paper').dblclick(function (e){
 
