@@ -124,11 +124,12 @@ ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
  socket.on('fileperaltriser', function (data) {
  
 var imgdaclient = new Image();
-
 imgdaclient.src = data.fileperaltri;
-
+imgdaclient.onload = function() {
+//	imgdaclient.src = data.fileperaltri;
 ctx.drawImage(imgdaclient, 20, 0);
- });	
+}
+});	
 	
  socket.on('doppioclickser', function (data) {
  ctx.fillStyle = data.color;
