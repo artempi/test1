@@ -29,8 +29,7 @@ if(!username)
 }
 
 username = username.substr(0,20);	
-
-	var socket = io.connect(url); 
+var socket = io.connect(url); 
 	
 var ctx = canvas[0].getContext('2d');	
 var spessore = jQuery('#spessore').value;
@@ -65,6 +64,19 @@ if (code == '13') {
 }}
 });
 
+$('#file-input').change(function(e) {
+        var file = e.target.files[0],
+            imageType = /image.*/;
+    if (!file.type.match(imageType))
+            return;
+
+        var reader = new FileReader();
+        reader.onload = fileOnload;
+    reader.readAsDataURL(file);  
+		     
+    });	
+
+/*
 jQuery('#salvasulserver').click(function (){
 var dataserver = canvas[0].toDataURL();
 
@@ -75,7 +87,7 @@ socket.emit('salvasulserver',{
 			});										  
 });
 
-
+*/
 
 
 
@@ -108,6 +120,15 @@ window.open(document.getElementById("canvasimg").src, "toDataURL() image", "widt
  jQuery('#cancellalavagna').click(function (){
 ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);													  
 });
+ 
+ socket.on('fileperaltriser', function (data) {
+ 
+var imgdaclient = new Image();
+
+imgdaclient.src = data.fileperaltri;
+
+ctx.drawImage(imgdaclient, 20, 0);
+ });	
 	
  socket.on('doppioclickser', function (data) {
  ctx.fillStyle = data.color;
@@ -213,7 +234,7 @@ document.getElementById('frecce').style.backgroundColor ='#ffff00';
     setInterval(function(){
         var totalOnline = 0;
         for(var ident in clients){
-            if(jQuery.now() - clients[ident].updated > 10000){
+            if(jQuery.now() - clients[ident].updated > 20000){
 
                 // Last update was more than 10 seconds ago.
                 // This user has probably closed the page
@@ -225,7 +246,7 @@ document.getElementById('frecce').style.backgroundColor ='#ffff00';
             else totalOnline++;
         }
         jQuery('#onlineCounter').html('Players Connected: '+totalOnline);
-    },10000);
+    },20000);
 
 	function drawLine(fromx, fromy, tox, toy){
 		ctx.strokeStyle = $('#minicolore').minicolors('rgbaString');
@@ -244,8 +265,19 @@ document.getElementById('frecce').style.backgroundColor ='#ffff00';
 		ctx.lineTo(tox, toy);
 		ctx.stroke();
 	}
-	
 
+function fileOnload(e) {
+        var $img = $('<img>', { src: e.target.result });
+        var canvas1 = $('#paper')[0];
+        var context1 = canvas1.getContext('2d');
+        $img.load(function() {
+            ctx.drawImage(this, 20, 0);
+			socket.emit('fileperaltri',{
+				'id': id,
+				'fileperaltri':  this.src
+				});	
+        });
+    }
 
 });
 

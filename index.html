@@ -25,20 +25,21 @@
 		
 	<script type="text/javascript">	
 		$(document).ready( function() {
-		
 	$('#minicolore').minicolors(
 	{
 	opacity:true
 	}
-	);				
+	);	
 	
+	 
 	});	
-		</script>
+	
+	</script>
     </head>    
     <body>
 <div id="controlli">	
 <div style="float:left;">
-<button id="cancellalavagna">Clear whiteboard</button><br />
+<button id="cancellalavagna">Clear whiteboard</button><button id="salvafoto">Save the draw</button><br />
 <select id="spessore">
   <option value="3" selected="selected">width</option>
   <option value="1">1</option>
@@ -58,11 +59,9 @@
 <option value="15">15</option>
 </select>	
 <input type="text" class="minicolors" id="minicolore" value="#000000" data-opacity="1.0" /><br />
-<button id="salvafoto">Save the draw</button> <br />
-<button id="salvasulserver">Save on server</button> <br /><br />
-Insert a text <br />
+<input type="file" id="file-input"> <br />
 <input type="text" id="scrivi" size="36" /> <br />
-Double click on the whiteboard where <br />you want to places the text<br />or enter if you want to chat
+Double click on the whiteboard where <br />you want to place the text<br />or enter if you want to chat
 <div id="testichat"></div>
 </div>
 <div id="frecce" onMouseOver="javascript:document.getElementById('frecce').style.backgroundColor ='#ffffff';">

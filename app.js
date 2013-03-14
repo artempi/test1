@@ -65,7 +65,7 @@ if (process.env.HEROKU === 'true') {
 
 // Listen for incoming connections from clients
 io.sockets.on('connection', function (socket) {
-									  
+/*									  
 client.get('filelog.txt').on('response', function(res){
 var miadata =	new Date();											  
 stringaip = socket.handshake.address.address  + ' ' + miadata.getDate() +'/' + miadata.getMonth() + '/' + miadata.getYear() 
@@ -75,7 +75,7 @@ stringaip = socket.handshake.address.address  + ' ' + miadata.getDate() +'/' + m
   res.setEncoding('utf8');
   res.on('data', function(chunk){
 //    console.log(chunk);
-stringafile = chunk;
+stringafile = stringafile + chunk;
 //     console.log(stringafile);
   }); 
 }).end();									  
@@ -88,7 +88,7 @@ client.putBuffer(buffer, '/filelog.txt', headers, function(err, res){
   // Logic
 });
 
-
+*/
 	// Start listening for mouse move events
 	socket.on('mousemove', function (data) {
 		
@@ -129,6 +129,13 @@ socket.on('chat', function (data) {
 		// This line sends the event (broadcasts it)
 		// to everyone except the originating client.
 		socket.broadcast.emit('chatser', data);
+		
+	});	
+socket.on('fileperaltri', function (data) {
+		
+		// This line sends the event (broadcasts it)
+		// to everyone except the originating client.
+		socket.broadcast.emit('fileperaltriser', data);
 		
 	});	
 	
