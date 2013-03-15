@@ -60,7 +60,10 @@ if (code == '13') {
 			});
  jQuery('<div class="testochat">ME ' + document.getElementById('scrivi').value +'</div>').appendTo('#testichat');
   document.getElementById('scrivi').value ='';
-	
+
+var objDiv = document.getElementById("testichat");
+objDiv.scrollTop = objDiv.scrollHeight;
+
 }}
 });
 
@@ -142,6 +145,8 @@ ctx.drawImage(imgdaclient, 20, 0);
 	//alert (data.testochat);
 jQuery('<div class="testochat">' + data.usernamerem +' '+ data.testochat +'</div>').appendTo('#testichat');         
 document.getElementById('frecce').style.backgroundColor ='#ffff00';
+var objDiv1 = document.getElementById("testichat");
+objDiv1.scrollTop = objDiv1.scrollHeight;
 	});	
  	
 	socket.on('moving', function (data) {
