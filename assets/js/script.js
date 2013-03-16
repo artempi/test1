@@ -9,6 +9,8 @@ jQuery(function(){
 	// The URL of your web server (the port is set in app.js)
 	//var url = 'http://localhost:3000';
     var url = window.location.hostname;
+	var positionx ='20';
+	var positiony='0';
 
 	var doc = jQuery(document),
 		canvas = jQuery('#paper'),
@@ -95,7 +97,8 @@ socket.emit('salvasulserver',{
 
 
 jQuery('#paper').dblclick(function (e){
-
+positionx = e.pageX;
+positiony= e.pageY;
 if (document.getElementById('scrivi').value.length > 1 ) {
 ctx.fillStyle = $('#minicolore').minicolors('rgbaString');
 ctx.fillText(document.getElementById('scrivi').value, e.pageX, e.pageY); 
@@ -130,7 +133,7 @@ var imgdaclient = new Image();
 imgdaclient.src = data.fileperaltri;
 imgdaclient.onload = function() {
 //	imgdaclient.src = data.fileperaltri;
-ctx.drawImage(imgdaclient, 20, 0);
+ctx.drawImage(imgdaclient, data.positionx, data.positiony);
 }
 });	
 	
@@ -274,12 +277,14 @@ objDiv1.scrollTop = objDiv1.scrollHeight;
 
 function fileOnload(e) {
         var $img = $('<img>', { src: e.target.result });
-        var canvas1 = $('#paper')[0];
-        var context1 = canvas1.getContext('2d');
+   //     var canvas1 = $('#paper')[0];
+      //     var context1 = canvas1.getContext('2d');
         $img.load(function() {
-            ctx.drawImage(this, 20, 0);
+            ctx.drawImage(this, positionx, positiony);
 			socket.emit('fileperaltri',{
 				'id': id,
+				'positionx': positionx,
+				'positiony': positiony,
 				'fileperaltri':  this.src
 				});	
         });

@@ -103,7 +103,7 @@ top:6px;
 left:3px;
 border:1px green solid;
 width:250px;
-height:230px;
+height:210px;
 font-size:11px;
 overflow:auto;
 }      
@@ -114,13 +114,8 @@ height:auto;
 
 #frecce {
 float:right;
-background-color:#FFFFFF;
-height:400px;
-}
-
-
-#frecce:hover {
-background-color:#FFFF00;
+background-color:transparent;
+height:445px;
 }
 
 #paper {
@@ -129,10 +124,10 @@ background-color:#FFFF00;
 
 #controlli  {
 position:absolute;
-top:3px;
+top:6px;
 left:-285px;
 width:300px;
-height:400px;
+height:450px;
 background-color:#ffffff;
 border:1px red solid;
 z-index:10;
@@ -141,6 +136,12 @@ z-index:10;
 left:0px;
 }
 
+#frecce:hover  {
+background-color:transparent;
+}
+#frecce:out  {
+background-color:transparent;
+}
 /*----------------------------
 	The Footer
 -----------------------------*/
