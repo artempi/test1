@@ -101,6 +101,7 @@ positionx = e.pageX;
 positiony= e.pageY;
 if (document.getElementById('scrivi').value.length > 1 ) {
 ctx.fillStyle = $('#minicolore').minicolors('rgbaString');
+ctx.font =  document.getElementById('fontsize').value +"px Tahoma";
 ctx.fillText(document.getElementById('scrivi').value, e.pageX, e.pageY); 
 
 socket.emit('doppioclick',{
@@ -109,7 +110,8 @@ socket.emit('doppioclick',{
 				'scrivi': document.getElementById('scrivi').value,				
 				'color': $('#minicolore').minicolors('rgbaString'),
 				'id': id,
-				'spessremo' : document.getElementById('spessore').value
+				'spessremo' : document.getElementById('spessore').value,
+				'fontsizerem': document.getElementById('fontsize').value
 			});
 
 document.getElementById('scrivi').value ='';
@@ -139,6 +141,7 @@ ctx.drawImage(imgdaclient, data.positionx, data.positiony);
 	
  socket.on('doppioclickser', function (data) {
  ctx.fillStyle = data.color;
+ ctx.font = data.fontsizerem + "px Tahoma";
 	ctx.fillText(data.scrivi, data.x, data.y); 
           
 	});	
