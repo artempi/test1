@@ -129,6 +129,7 @@ window.open(document.getElementById("canvasimg").src, "toDataURL() image", "widt
 ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);													  
 });
  
+ 
  socket.on('fileperaltriser', function (data) {
  
 var imgdaclient = new Image();
@@ -189,7 +190,7 @@ objDiv1.scrollTop = objDiv1.scrollHeight;
 
   //  document.addEventListener("touchstart", touchHandler, true);
   
- // document.addEventListener("blur", cambiacolore(), true);
+// document.addEventListener("blur", cambiacolore(), true);
 		  
    document.addEventListener("change", cambiaspessore, true);
   function cambiaspessore () {
@@ -255,8 +256,12 @@ objDiv1.scrollTop = objDiv1.scrollHeight;
                 delete clients[ident];
                 delete cursors[ident];
             }
-            else totalOnline++;
-        }
+            else {
+			totalOnline++;
+      var thissound=document.getElementById("audio1");
+thissound.play();												  
+		
+        }}
         jQuery('#onlineCounter').html('Players Connected: '+totalOnline);
     },20000);
 
