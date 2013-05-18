@@ -257,10 +257,11 @@ objDiv1.scrollTop = objDiv1.scrollHeight;
                 delete cursors[ident];
             }
             else {
-			totalOnline++;
+			 totalOnline++;
+			 if (document.getElementById('faisuonare').checked) {
       var thissound=document.getElementById("audio1");
 thissound.play();												  
-		
+			 }
         }}
         jQuery('#onlineCounter').html('Players Connected: '+totalOnline);
     },20000);
