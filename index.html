@@ -24,7 +24,8 @@
         <![endif]-->
 		
 	<script type="text/javascript">	
-		$(document).ready( function() {
+		$(document).ready(function() {
+			
 	$('#minicolore').minicolors(
 	{
 	opacity:true
@@ -37,6 +38,7 @@
 	</script>
     </head>    
     <body>
+	<video id="video" style="position:absolute;top:0px;left:0px;width:320px;height:240px;display:none;" autoplay></video>	
 <div id="controlli">	
 <div style="float:left;">
 <button id="cancellalavagna">Clear your board</button><button id="salvafoto">Save the draw</button><br />
@@ -97,7 +99,8 @@ Double click on the whiteboard where <br />you want to place the text<br />or en
 <div id="testichat"></div>
 <audio id="audio1" src="assets/success.wav"  autobuffer>
 </audio><br />
-<input id="faisuonare" type="checkbox" value="" />Play a sound when someone <br />connect this whiteboard
+<input id="faisuonare" type="checkbox" value="" />Play a sound when someone <br />connect this whiteboard<br />
+<button id="catturacam">capture image from webcam</button>
 </div>
 <div id="frecce" onMouseOver="javascript:document.getElementById('frecce').style.backgroundColor ='#ffffff';">
 <div style="padding-bottom:50%;vertical-align:middle;">
@@ -109,13 +112,15 @@ Double click on the whiteboard where <br />you want to place the text<br />or en
 		<div id="cursors">
 	    	<!-- The mouse pointers will be created here -->
 		</div>
-<img id="canvasimg" alt="" style="position:absolute;left:300px;top:10px;border:none;cursor:pointer;width:1900px;height:1000px;visibility:hidden;"  />
+		
+  <img id="canvasimg" alt="" style="position:absolute;left:300px;top:10px;border:none;cursor:pointer;width:1900px;height:1000px;visibility:hidden;" /> 
 		<canvas id="paper" width="1900" height="1000">
 			Your browser needs to support canvas for this to work!
 		</canvas>
 		
+	<canvas id="paper1" style="display:none;" width="320" height="240"> </canvas>
 		<hgroup id="instructions">		
-			<h1>Draw anywhere!</h1>
+			<h1>Draw anywhere!</h1> 
 			<h2>You will see everyone else who's doing the same.</h2>
 			<h3>If you like this web application please click the button LIKE at the bottom of this page</h3>
 		</hgroup>
@@ -123,7 +128,7 @@ Double click on the whiteboard where <br />you want to place the text<br />or en
         <footer>
 				
 	        <h2><a href="mailto:vrobbi@libero.it" target='_blank'>send me a mail if you want to customer this app</a>&nbsp;&nbsp;&nbsp;<a href="http://www.nuovoweb.eu" target="_blank">www.nuovoweb.eu</a></h2>
-            <p class='tzine' id='onlineCounter' href=''>Players connected: 0</p>
+            <p class='tzine' id='onlineCounter' href=''>Users connected: 0</p>
 <div id="fb-root" style="position:absolute;left:0px;bottom:-10px;width:100px;height:auto;"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];

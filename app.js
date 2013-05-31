@@ -138,5 +138,13 @@ socket.on('fileperaltri', function (data) {
 		socket.broadcast.emit('fileperaltriser', data);
 		
 	});	
+
+socket.on('camperaltri', function (data) {
+		
+		// This line sends the event (broadcasts it)
+		// to everyone except the originating client.
+		socket.broadcast.emit('camperaltriser', data);		
+	});	
+
 	
 });

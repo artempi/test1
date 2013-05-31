@@ -5,7 +5,8 @@ jQuery(function(){
 		alert('Sorry, it looks like your browser does not support canvas!');
 		return false;
 	}
-
+	
+	
 	// The URL of your web server (the port is set in app.js)
 	//var url = 'http://localhost:3000';
     var url = window.location.hostname;
@@ -14,6 +15,7 @@ jQuery(function(){
 
 	var doc = jQuery(document),
 		canvas = jQuery('#paper'),
+		canvas1 = jQuery('#paper1'),
 	instructions = jQuery('#instructions');
 var color = '#000000';
 	// A flag for drawing activity
@@ -24,6 +26,7 @@ var color = '#000000';
 	//  funzione richiesta di nick name   
 	
 	var username = '';
+				
 
 if(!username)
 {
@@ -34,6 +37,7 @@ username = username.substr(0,20);
 var socket = io.connect(url); 
 	
 var ctx = canvas[0].getContext('2d');	
+var ctx1 = canvas1[0].getContext('2d');	
 var spessore = jQuery('#spessore').value;
 var colorem;
     // Force canvas to dynamically change its size to the same width/height
@@ -128,6 +132,15 @@ window.open(document.getElementById("canvasimg").src, "toDataURL() image", "widt
  jQuery('#cancellalavagna').click(function (){
 ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);													  
 });
+ 
+  socket.on('camperaltriser', function (data) {
+var camdaclient = new Image();
+camdaclient.src = data.camperaltridati;
+camdaclient.onload = function() {
+//	imgdaclient.src = data.fileperaltri;
+ctx.drawImage(camdaclient,data.positionx,data.positiony,320,240);
+}
+});	
  
  
  socket.on('fileperaltriser', function (data) {
@@ -263,7 +276,7 @@ objDiv1.scrollTop = objDiv1.scrollHeight;
 thissound.play();												  
 			 }
         }}
-        jQuery('#onlineCounter').html('Players Connected: '+totalOnline);
+        jQuery('#onlineCounter').html('Users connected: '+totalOnline);
     },20000);
 
 	function drawLine(fromx, fromy, tox, toy){
@@ -285,10 +298,11 @@ thissound.play();
 	}
 
 function fileOnload(e) {
-        var $img = $('<img>', { src: e.target.result });
+        var img = $('<img>', { src: e.target.result });
+		// alert(img.src.value);
    //     var canvas1 = $('#paper')[0];
       //     var context1 = canvas1.getContext('2d');
-        $img.load(function() {
+        img.load(function() {
             ctx.drawImage(this, positionx, positiony);
 			socket.emit('fileperaltri',{
 				'id': id,
@@ -298,6 +312,83 @@ function fileOnload(e) {
 				});	
         });
     }
+	
+(function() {
+
+  var streaming = false,
+      video        = document.getElementById('video'),
+  	paper1  = document.getElementById('paper1'),
+      startbutton  = document.getElementById('catturacam'),
+      width = 320,
+      height = 240;
+
+  navigator.getMedia = ( navigator.getUserMedia || 
+                         navigator.webkitGetUserMedia ||
+                         navigator.mozGetUserMedia ||
+                         navigator.msGetUserMedia);
+
+  navigator.getMedia(
+    { 
+      video: true, 
+      audio: false 
+    },
+    function(stream) {
+      if (navigator.mozGetUserMedia) { 
+        video.mozSrcObject = stream;
+      } else {
+        var vendorURL = window.URL || window.webkitURL;
+        video.src = vendorURL ? vendorURL.createObjectURL(stream) : stream;
+      }
+      video.play();
+    },
+    function(err) {
+      console.log("An error occured! " + err);
+    }
+  );
+
+  video.addEventListener('canplay', function(ev){
+    if (!streaming) {
+      height = video.videoHeight / (video.videoWidth/width);
+      video.setAttribute('width', 320);
+      video.setAttribute('height', 240);
+ //     canvas.setAttribute('width', width);
+   //   canvas.setAttribute('height', height);
+      streaming = true;
+    }
+	 video.setAttribute('width', 320);
+      video.setAttribute('height', 240);
+  }, false);
+
+  function takepicture(e) {
+   // canvas.width = 320;
+  //  canvas.height = 240;
+ //  alert('rthrth');
+   ctx.drawImage(video, positionx, positiony,320,240);
+ctx1.drawImage(video,0,0,320,240);
+// ctx.putImageData (leggodaticam,200,10,100,150);
+var datacam = paper1.toDataURL('image/png');
+	//    alert(paper1);
+               //   var img = $('<img>', { src: video });
+         // paper.setAttribute('src', data);
+socket.emit('camperaltri',{
+				'id': id,
+				'positionx': positionx,
+				'positiony': positiony,
+				'camperaltridati':  datacam
+				});			 
+  }
+
+  startbutton.addEventListener('click', function(ev){
+												
+      takepicture();
+    ev.preventDefault();
+  }, false);
+
+})();
+
+
+
 
 });
 
+	
