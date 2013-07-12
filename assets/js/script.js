@@ -98,7 +98,15 @@ socket.emit('salvasulserver',{
 
 */
 
-
+jQuery('#vedomonitor').click(function (){
+if(document.getElementById('monitorcam').style.display == 'none')   { 
+document.getElementById("monitorcam").style.display = 'block';
+document.getElementById('vedomonitor').innerHTML = ' Hide webcam monitor ';
+} else  {
+document.getElementById('monitorcam').style.display = 'none';	
+document.getElementById('vedomonitor').innerHTML = ' Show webcam monitor ';
+}										  
+});
 
 jQuery('#paper').dblclick(function (e){
 positionx = e.pageX;
@@ -360,16 +368,10 @@ function fileOnload(e) {
   }, false);
 
   function takepicture(e) {
-   // canvas.width = 320;
-  //  canvas.height = 240;
- //  alert('rthrth');
-   ctx.drawImage(video, positionx, positiony,320,240);
+ ctx.drawImage(video, positionx, positiony,320,240);
 ctx1.drawImage(video,0,0,320,240);
-// ctx.putImageData (leggodaticam,200,10,100,150);
 var datacam = paper1.toDataURL('image/png');
-	//    alert(paper1);
-               //   var img = $('<img>', { src: video });
-         // paper.setAttribute('src', data);
+// paper1 e ctx1 servono per prelevare solo i dati della webcam e inviarli al server per gli altri	
 socket.emit('camperaltri',{
 				'id': id,
 				'positionx': positionx,
