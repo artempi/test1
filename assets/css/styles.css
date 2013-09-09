@@ -107,6 +107,9 @@ height:180px;
 font-size:11px;
 overflow:auto;
 }      
+#testichat span{
+background-color: #ffff00;
+}      
 .testochat  {
 width:100%;
 height:auto;
