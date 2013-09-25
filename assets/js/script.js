@@ -4,12 +4,16 @@ jQuery(function(){
 	if(!('getContext' in document.createElement('canvas'))){
 		alert('Sorry, it looks like your browser does not support canvas!');
 		return false;
-	}
-	
+	}     	
 	
 	// The URL of your web server (the port is set in app.js)
 	//var url = 'http://localhost:3000';
     var url = window.location.hostname;
+	var stanza = '';
+	if (location.href.indexOf('#')!= -1){
+stanza  = location.href.substring(location.href.indexOf('#')+1);
+ }
+	
 	var positionx ='20';
 	var positiony='0';
 
@@ -35,7 +39,7 @@ if(!username)
 
 username = username.substr(0,20);	
 var socket = io.connect(url); 
-	
+
 var ctx = canvas[0].getContext('2d');	
 var ctx1 = canvas1[0].getContext('2d');	
 var spessore = jQuery('#spessore').value;
@@ -54,6 +58,34 @@ var colorem;
 	// Generate an unique ID
 	var id = Math.round(jQuery.now()*Math.random());
 if (username =='')  {username = id }
+//url.substring(url.indexOf('#')+1);
+
+if (stanza.length > 2) {
+socket.emit('setuproom',{
+				'room': stanza,				
+				'id': id,
+				'usernamerem' : username
+			});
+} else {
+socket.emit('setuproom',{
+				'room': 'public',				
+				'id': id,
+				'usernamerem' : username
+			});      
+}
+
+ socket.on('setuproomser', function (data) {
+stanza = data.room;	
+alert	(data.inforoom); 	
+//	 socket.join(data.room);
+		// This line sends the event (broadcasts it)
+		// to everyone except the originating client.
+	//	socket.broadcast.emit('room', data);
+	});
+
+
+
+
 jQuery('#scrivi').keypress(function(e){
 var code = e.keyCode;
 if (code == '13') {
@@ -62,7 +94,8 @@ if (code == '13') {
  socket.emit('chat',{
 				'testochat': document.getElementById('scrivi').value,				
 				'id': id,
-				'usernamerem' : username
+				'usernamerem' : username,
+				'room' : stanza
 			});
  jQuery('<div class="testochat"><span>ME:</span> ' + document.getElementById('scrivi').value +'</div>').appendTo('#testichat');
   document.getElementById('scrivi').value ='';
@@ -123,7 +156,8 @@ socket.emit('doppioclick',{
 				'color': $('#minicolore').minicolors('rgbaString'),
 				'id': id,
 				'spessremo' : document.getElementById('spessore').value,
-				'fontsizerem': document.getElementById('fontsize').value
+				'fontsizerem': document.getElementById('fontsize').value,
+				'room' : stanza
 			});
 
 document.getElementById('scrivi').value ='';
@@ -140,6 +174,10 @@ window.open(document.getElementById("canvasimg").src, "toDataURL() image", "widt
  jQuery('#cancellalavagna').click(function (){
 ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);													  
 });
+ 
+ jQuery('#inforoom').click(function (){
+alert('TO CREATE YOUR OWN PRIVATE ROOM, TYPE AT THE END OF THE INTERNET ADDRESS, A SEQUENCE OF CHARACTERS OR NUMBERS PRECEDED BY THE CHARACTER # FOR EXAMPLE:\n\r http:\/\/vrobbi-nodedrawing.herokuapp.com\/#myroom123  WHERE \'myroom123\' WILL BE YOUR PRIVATE ROOM\n\r REMEMBER TO WRITE ONLY CHARACTERS OF TYPE LETTERS AND/OR NUMBERS THEN SEND THIS ADDRESS TO YOUR FRIENDS THAT YOU LIKE TO SHARE PRIVATELY WITH THE USE OF THIS BOARD');						  
+}); 
  
   socket.on('camperaltriser', function (data) {
 var camdaclient = new Image();
@@ -248,7 +286,8 @@ objDiv1.scrollTop = objDiv1.scrollHeight;
                 'color': $('#minicolore').minicolors('rgbaString'),
 				'id': id,
 				'usernamerem' : username,
-				'spessremo' : document.getElementById('spessore').value
+				'spessremo' : document.getElementById('spessore').value,
+				'room' : stanza
 			});
 			lastEmit = jQuery.now();
 		}
@@ -316,7 +355,8 @@ function fileOnload(e) {
 				'id': id,
 				'positionx': positionx,
 				'positiony': positiony,
-				'fileperaltri':  this.src
+				'fileperaltri':  this.src,
+				'room': stanza
 				});	
         });
     }
@@ -359,12 +399,12 @@ function fileOnload(e) {
       height = video.videoHeight / (video.videoWidth/width);
       video.setAttribute('width', 320);
       video.setAttribute('height', 240);
+//	  video.setAttribute('maxFrameRate',5);
  //     canvas.setAttribute('width', width);
    //   canvas.setAttribute('height', height);
       streaming = true;
     }
-	 video.setAttribute('width', 320);
-      video.setAttribute('height', 240);
+		  
   }, false);
 
   function takepicture(e) {
@@ -376,7 +416,8 @@ socket.emit('camperaltri',{
 				'id': id,
 				'positionx': positionx,
 				'positiony': positiony,
-				'camperaltridati':  datacam
+				'camperaltridati':  datacam,
+				'room' : stanza
 				});			 
   }
 

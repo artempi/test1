@@ -14,6 +14,7 @@ var client = knox.createClient({
 });
 var stringafile ='';
 var stringaip ='';
+var stanza ='';
 /*
 var object = { foo: "bar" };
 var string = JSON.stringify(object);
@@ -50,7 +51,7 @@ function handler (request, response) {
 }
 
 // Delete this row if you want to see debug messages
- io.set('log level', 1);
+io.set('log level', 1);
 
 // Heroku doesn't support websockets so...
 // Detect if heroku via config vars
@@ -62,10 +63,11 @@ if (process.env.HEROKU === 'true') {
         io.set("polling duration", 20);
     });
 }
-
 // Listen for incoming connections from clients
 io.sockets.on('connection', function (socket) {
-/*									  
+      
+/*	   				  
+									  
 client.get('filelog.txt').on('response', function(res){
 var miadata =	new Date();											  
 stringaip = socket.handshake.address.address  + ' ' + miadata.getDate() +'/' + miadata.getMonth() + '/' + miadata.getYear() 
@@ -87,14 +89,32 @@ var headers = {
 client.putBuffer(buffer, '/filelog.txt', headers, function(err, res){
   // Logic
 });
-
 */
+
+ socket.on('setuproom', function (data) { 
+ var myregexp = /^[a-zA-Z0-9]+$/;
+   
+	if (myregexp.test(data.room)=== true)   {
+ socket.join(data.room);
+socket.emit('setuproomser', {
+			'room' :  data.room,
+				'inforoom' : 'YOUR NAME ROOM IS VALID OR YOU DO NOT HAVE CHOSEN A ROOM, NOW YOUR PRIVATE ROOM IS ' + data.room			
+			});
+}  else {
+		socket.join('public');	
+	socket.emit('setuproomser', {
+				'room' : 'public',
+				'inforoom' : 'YOUR NAME ROOM IS NOT VALID, NOW YOUR ROOM IS public'
+			}); 	
+}
+	});
+
 	// Start listening for mouse move events
 	socket.on('mousemove', function (data) {
-		
-		// This line sends the event (broadcasts it)
-		// to everyone except the originating client.
-		socket.broadcast.emit('moving', data);
+			
+	//	if (data.room !='' || data.room !='public') {		
+		socket.broadcast.to(data.room).emit('moving', data);
+	    //	}  
 	});
 	
 socket.on('salvasulserver', function (data) {
@@ -109,42 +129,35 @@ var req = client.put(data.orario + '.png', {
 });
 req.on('response', function(res){
   if (200 == res.statusCode) {
-//    console.log('saved to %s', req.url);
+//    console.log('saved to %s', req.url);    
   }
 });
 req.end(buf);		
-		
-	});	
+});	
 
 socket.on('doppioclick', function (data) {
 		
 		// This line sends the event (broadcasts it)
 		// to everyone except the originating client.
-		socket.broadcast.emit('doppioclickser', data);
-		
+	socket.broadcast.to(data.room).emit('doppioclickser', data);
+				      
 	});	
 
 socket.on('chat', function (data) {
 		
 		// This line sends the event (broadcasts it)
 		// to everyone except the originating client.
-		socket.broadcast.emit('chatser', data);
-		
+		socket.broadcast.to(data.room).emit('chatser', data);
 	});	
 socket.on('fileperaltri', function (data) {
 		
 		// This line sends the event (broadcasts it)
 		// to everyone except the originating client.
-		socket.broadcast.emit('fileperaltriser', data);
-		
+	socket.broadcast.to(data.room).emit('fileperaltriser', data);
 	});	
 
 socket.on('camperaltri', function (data) {
-		
-		// This line sends the event (broadcasts it)
-		// to everyone except the originating client.
-		socket.broadcast.emit('camperaltriser', data);		
+	 socket.broadcast.to(data.room).emit('camperaltriser', data);		
 	});	
-
 	
 });

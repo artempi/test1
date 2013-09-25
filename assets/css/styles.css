@@ -206,3 +206,14 @@ footer p.tzine{
     text-decoration: none;
     top: 0;
 }
+
+button  {
+font-size:12px;
+margin:0;
+}
+
+button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+	font-size:12px
+}
