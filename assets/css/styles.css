@@ -107,13 +107,20 @@ height:180px;
 font-size:11px;
 overflow:auto;
 }      
-#testichat span{
-background-color: #ffff00;
-}      
-.testochat  {
+    
+.testochat, .testochatser {
 width:100%;
 height:auto;
 }
+
+.testochat span {
+background-color: #ffff00;
+}  
+
+.testochatser > span {
+background-color: #09ff00;
+}
+
 
 #frecce {
 float:right;

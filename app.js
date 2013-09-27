@@ -98,13 +98,13 @@ client.putBuffer(buffer, '/filelog.txt', headers, function(err, res){
  socket.join(data.room);
 socket.emit('setuproomser', {
 			'room' :  data.room,
-				'inforoom' : 'YOUR NAME ROOM IS VALID OR YOU DO NOT HAVE CHOSEN A ROOM, NOW YOUR PRIVATE ROOM IS ' + data.room			
+				'inforoom' : 'YOUR NAME ROOM IS VALID,<br />NOW YOUR PRIVATE ROOM IS ' + data.room			
 			});
 }  else {
 		socket.join('public');	
-	socket.emit('setuproomser', {
+	socket.emit('setuproomserKO', {
 				'room' : 'public',
-				'inforoom' : 'YOUR NAME ROOM IS NOT VALID, NOW YOUR ROOM IS public'
+				'inforoom' : 'YOUR NAME ROOM IS NOT VALID,   REMEMBER TO USE AT LEAST THREE CHARACTERS OF TYPE ONLY LETTERS AND/OR NUMBERS, NOTHING ELSE.  NOW YOUR ROOM IS PUBLIC'
 			}); 	
 }
 	});

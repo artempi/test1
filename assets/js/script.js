@@ -74,16 +74,16 @@ socket.emit('setuproom',{
 			});      
 }
 
- socket.on('setuproomser', function (data) {
+ socket.on('setuproomserKO', function (data) {
 stanza = data.room;	
 alert	(data.inforoom); 	
-//	 socket.join(data.room);
-		// This line sends the event (broadcasts it)
-		// to everyone except the originating client.
-	//	socket.broadcast.emit('room', data);
+});
+ 
+  socket.on('setuproomser', function (data) {
+stanza = data.room;	
+ jQuery('<div class="testochatser"><span>FROM SERVER:</span> '+ data.inforoom +'</div>').appendTo('#testichat');
+ document.getElementById('frecce').style.backgroundColor ='#ffff00';
 	});
-
-
 
 
 jQuery('#scrivi').keypress(function(e){
