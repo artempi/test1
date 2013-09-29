@@ -96,12 +96,14 @@ client.putBuffer(buffer, '/filelog.txt', headers, function(err, res){
    
 	if (myregexp.test(data.room)=== true)   {
  socket.join(data.room);
+ console.log(io.sockets.manager.rooms);
 socket.emit('setuproomser', {
 			'room' :  data.room,
 				'inforoom' : 'YOUR ROOM NAME IS VALID,<br />NOW YOUR PRIVATE ROOM IS ' + data.room			
 			});
 }  else {
 		socket.join('public');	
+ console.log('ERRORE STANZA');
 	socket.emit('setuproomserKO', {
 				'room' : 'public',
 				'inforoom' : 'YOUR ROOM NAME IS NOT VALID,   REMEMBER TO USE AT LEAST THREE CHARACTERS OF TYPE ONLY LETTERS AND/OR NUMBERS, NOTHING ELSE.  NOW YOUR ROOM IS PUBLIC'
