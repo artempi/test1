@@ -7,8 +7,8 @@
 // Including libraries
 var knox = require('knox');
 
-var client = knox.createClient({
-    key: 'AKIAIDZAMIX2REQZACVA',
+ var client = knox.createClient({
+	key:'AKIAIDZAMIX2REQZACVA',
 	secret: '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'
   , bucket: 'bucket222'
 });
@@ -63,9 +63,12 @@ if (process.env.HEROKU === 'true') {
         io.set("polling duration", 20);
     });
 }
+
+
 // Listen for incoming connections from clients
 io.sockets.on('connection', function (socket) {
-      
+   
+
 /*	   				  
 									  
 client.get('filelog.txt').on('response', function(res){
@@ -90,6 +93,13 @@ client.putBuffer(buffer, '/filelog.txt', headers, function(err, res){
   // Logic
 });
 */
+
+
+socket.on('message', function (data) {
+       socket.broadcast.emit('message', data);
+	   console.log('inviato messaggio');
+    });
+
 
  socket.on('setuproom', function (data) { 
  var myregexp = /^[a-zA-Z0-9]+$/;

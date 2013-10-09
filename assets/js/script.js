@@ -74,6 +74,8 @@ socket.emit('setuproom',{
 			});      
 }
 
+ 
+
  socket.on('setuproomserKO', function (data) {
 stanza = data.room;	
 alert	(data.inforoom); 	
@@ -167,7 +169,7 @@ document.getElementById('scrivi').value ='';
 jQuery('#salvafoto').click(function (){
 var dataURL = canvas[0].toDataURL();
 document.getElementById("canvasimg").src = dataURL;  
-window.open(document.getElementById("canvasimg").src, "toDataURL() image", "width=800, height=800");									
+window.open(document.getElementById("canvasimg").src, "toDataURL() image", "width=1000, height=1000");									
 										  
 });
 
@@ -307,7 +309,7 @@ objDiv1.scrollTop = objDiv1.scrollHeight;
     setInterval(function(){
         var totalOnline = 0;
         for(var ident in clients){
-            if(jQuery.now() - clients[ident].updated > 20000){
+            if(jQuery.now() - clients[ident].updated > 16000){
 
                 // Last update was more than 10 seconds ago.
                 // This user has probably closed the page
@@ -324,7 +326,7 @@ thissound.play();
 			 }
         }}
         jQuery('#onlineCounter').html('Users connected: '+totalOnline);
-    },20000);
+    },16000);
 
 	function drawLine(fromx, fromy, tox, toy){
 		ctx.strokeStyle = $('#minicolore').minicolors('rgbaString');
