@@ -1,6 +1,6 @@
 {
   "name": "DrawingGame",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "dependencies":
   {
     "node-static" : "latest",
@@ -8,7 +8,7 @@
 "knox": "~0.3.1"
  },
   "engines": {
-    "node": "0.6.x",
-    "npm": "1.1.4"
+    "node": ">= 0.8.0",
+    "npm": "1.2.x"
   }
 }
