@@ -14,7 +14,7 @@ jQuery(function(){
 stanza  = location.href.substring(location.href.indexOf('#')+1);
  }
 	
-	var positionx ='20';
+	var positionx ='23';
 	var positiony='0';
 
 	var doc = jQuery(document),
@@ -78,6 +78,7 @@ socket.emit('setuproom',{
 
  socket.on('setuproomserKO', function (data) {
 stanza = data.room;	
+document.getElementById('audiocall').disabled = false; 
 alert	(data.inforoom); 	
 });
  
@@ -85,6 +86,7 @@ alert	(data.inforoom);
 stanza = data.room;	
  jQuery('<div class="testochatser"><span>FROM SERVER:</span> '+ data.inforoom +'</div>').appendTo('#testichat');
  document.getElementById('frecce').style.backgroundColor ='#ffff00';
+ document.getElementById('audiocall').disabled = false;
 	});
 
 
@@ -177,6 +179,19 @@ window.open(document.getElementById("canvasimg").src, "toDataURL() image", "widt
 ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);													  
 });
  
+  jQuery('#audiocall').click(function (){
+window.open('http://www.nuovoweb.eu/webrtc/soloaudio.html#' + stanza, 'WEBRTC AUDIO CALL','width=600,height=400');									  
+});
+  
+  jQuery('#suonacamp').click(function (){
+
+socket.emit('suonacamp',{
+				'id': id,
+				'room' : stanza
+			});
+
+});  
+ 
  jQuery('#inforoom').click(function (){
 alert('TO CREATE YOUR OWN PRIVATE ROOM, TYPE AT THE END OF THE INTERNET ADDRESS, A SEQUENCE OF CHARACTERS OR NUMBERS PRECEDED BY THE CHARACTER # FOR EXAMPLE:\n\r http:\/\/vrobbi-nodedrawing.herokuapp.com\/#myroom123  WHERE \'myroom123\' WILL BE YOUR PRIVATE ROOM\n\r REMEMBER TO WRITE ONLY CHARACTERS OF TYPE LETTERS AND/OR NUMBERS THEN SEND THIS ADDRESS TO YOUR FRIENDS THAT YOU LIKE TO SHARE PRIVATELY WITH THE USE OF THIS BOARD');						  
 }); 
@@ -215,7 +230,16 @@ jQuery('<div class="testochat"><span>' + data.usernamerem +':</span> '+ data.tes
 document.getElementById('frecce').style.backgroundColor ='#ffff00';
 var objDiv1 = document.getElementById("testichat");
 objDiv1.scrollTop = objDiv1.scrollHeight;
-	});	
+	});
+  
+  socket.on('suonacampser', function (data) {
+
+ if (document.getElementById('faisuonare').checked) {
+  //    var thissound=document.getElementById("audio1");
+document.getElementById("audio1").play();												  
+			 }
+	
+		});
  	
 	socket.on('moving', function (data) {
 		
@@ -319,15 +343,11 @@ objDiv1.scrollTop = objDiv1.scrollHeight;
                 delete cursors[ident];
             }
             else {
-			 totalOnline++;
-			 if (document.getElementById('faisuonare').checked) {
-      var thissound=document.getElementById("audio1");
-thissound.play();												  
-			 }
+			 totalOnline++;			
         }}
         jQuery('#onlineCounter').html('Users connected: '+totalOnline);
     },16000);
-
+//// end setinterval function ****************************
 	function drawLine(fromx, fromy, tox, toy){
 		ctx.strokeStyle = $('#minicolore').minicolors('rgbaString');
 		ctx.lineWidth = document.getElementById('spessore').value;	
@@ -430,9 +450,6 @@ socket.emit('camperaltri',{
   }, false);
 
 })();
-
-
-
 
 });
 

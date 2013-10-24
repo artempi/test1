@@ -135,12 +135,13 @@ height:445px;
 #controlli  {
 position:absolute;
 top:6px;
-left:-285px;
+left:-282px;
 width:300px;
 height:480px;
 background-color:#ffffff;
 border:1px red solid;
 z-index:10;
+font-size:12px;
 }
 #controlli:hover  {
 left:0px;

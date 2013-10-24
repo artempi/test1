@@ -94,12 +94,9 @@ client.putBuffer(buffer, '/filelog.txt', headers, function(err, res){
 });
 */
 
-
-socket.on('message', function (data) {
-       socket.broadcast.emit('message', data);
-	   console.log('inviato messaggio');
-    });
-
+socket.on('suonacamp', function (data) {
+socket.broadcast.to(data.room).emit('suonacampser', data);
+});
 
  socket.on('setuproom', function (data) { 
  var myregexp = /^[a-zA-Z0-9]+$/;
@@ -111,6 +108,8 @@ socket.emit('setuproomser', {
 			'room' :  data.room,
 				'inforoom' : 'YOUR ROOM NAME IS VALID,<br />NOW YOUR PRIVATE ROOM IS ' + data.room			
 			});
+socket.broadcast.to(data.room).emit('suonacampser', data);
+
 }  else {
 		socket.join('public');	
  console.log('ERRORE STANZA');
