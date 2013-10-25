@@ -78,7 +78,8 @@ socket.emit('setuproom',{
 
  socket.on('setuproomserKO', function (data) {
 stanza = data.room;	
-document.getElementById('audiocall').disabled = false; 
+document.getElementById('audiocall').disabled = false;
+document.getElementById('videocall').disabled = false;
 alert	(data.inforoom); 	
 });
  
@@ -87,6 +88,7 @@ stanza = data.room;
  jQuery('<div class="testochatser"><span>FROM SERVER:</span> '+ data.inforoom +'</div>').appendTo('#testichat');
  document.getElementById('frecce').style.backgroundColor ='#ffff00';
  document.getElementById('audiocall').disabled = false;
+ document.getElementById('videocall').disabled = false;
 	});
 
 
@@ -179,9 +181,14 @@ window.open(document.getElementById("canvasimg").src, "toDataURL() image", "widt
 ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);													  
 });
  
-  jQuery('#audiocall').click(function (){
-window.open('http://www.nuovoweb.eu/webrtc/soloaudio.html#' + stanza, 'WEBRTC AUDIO CALL','width=600,height=400');									  
+jQuery('#audiocall').click(function (){
+window.open('http://www.nuovoweb.eu/webrtc/soloaudio.html#' + stanza, 'WEBRTC VOICE CALL','width=700,height=400');									  
 });
+
+jQuery('#videocall').click(function (){
+window.open('http://www.nuovoweb.eu/webrtc/#' + stanza, 'WEBRTC VIDEO/AUDIO CALL','width=700,height=400');								  
+});
+
   
   jQuery('#suonacamp').click(function (){
 
