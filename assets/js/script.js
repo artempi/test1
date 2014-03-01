@@ -85,7 +85,7 @@ alert	(data.inforoom);
  
   socket.on('setuproomser', function (data) {
 stanza = data.room;	
- jQuery('<div class="testochatser"><span>FROM SERVER:</span> '+ data.inforoom +'</div>').appendTo('#testichat');
+ jQuery('<div class="testochatser"><span>FROM SERVER:</span> '+ data.inforoom + data.listautenti +'</div>').appendTo('#testichat');
  document.getElementById('frecce').style.backgroundColor ='#ffff00';
  document.getElementById('audiocall').disabled = false;
  document.getElementById('videocall').disabled = false;
@@ -186,7 +186,7 @@ window.open('http://www.nuovoweb.eu/webrtc/soloaudio.html#' + stanza, 'WEBRTC VO
 });
 
 jQuery('#videocall').click(function (){
-window.open('http://www.nuovoweb.eu/webrtc/#' + stanza, 'WEBRTC VIDEO/AUDIO CALL','width=700,height=400');								  
+window.open('http://www.nuovoweb.eu/webrtc/#' + stanza, 'WEBRTC VIDEO/AUDIO CALL','width=800,height=400');								  
 });
 
   
@@ -240,12 +240,15 @@ objDiv1.scrollTop = objDiv1.scrollHeight;
 	});
   
   socket.on('suonacampser', function (data) {
-
  if (document.getElementById('faisuonare').checked) {
   //    var thissound=document.getElementById("audio1");
 document.getElementById("audio1").play();												  
-			 }
-	
+			 }	
+		});
+  
+  socket.on('listautentiser', function (data) {
+jQuery('<div class="testochatser"><span>FROM SERVER:</span> '+ data.listautenti +'</div>').appendTo('#testichat');
+document.getElementById('frecce').style.backgroundColor ='#ffff00'; 
 		});
  	
 	socket.on('moving', function (data) {

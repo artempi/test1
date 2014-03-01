@@ -67,7 +67,7 @@ if (process.env.HEROKU === 'true') {
 
 // Listen for incoming connections from clients
 io.sockets.on('connection', function (socket) {
-   
+socket.join('public');   
 
 /*	   				  
 									  
@@ -100,23 +100,52 @@ socket.broadcast.to(data.room).emit('suonacampser', data);
 
  socket.on('setuproom', function (data) { 
  var myregexp = /^[a-zA-Z0-9]+$/;
-   
+ console.log(data.room + ' ereerg'); 
 	if (myregexp.test(data.room)=== true)   {
+socket.leave('public');
  socket.join(data.room);
- console.log(io.sockets.manager.rooms);
+ socket.nickname = data.usernamerem;
+ // console.log(io.sockets.manager.rooms);
+  console.log (Object.keys(io.sockets.manager.rooms));
+ 
+var roster = io.sockets.clients(data.room);
+var listautenti = '';
+roster.forEach(function(client) {
+listautenti =	listautenti +  client.nickname + '<br />';
+}); 
+listautenti = 'LIST USERS IN THIS ROOM: ' +  listautenti;
+ 
+ 
 socket.emit('setuproomser', {
 			'room' :  data.room,
-				'inforoom' : 'YOUR ROOM NAME IS VALID,<br />NOW YOUR PRIVATE ROOM IS ' + data.room			
+				'inforoom' : 'YOUR ROOM NAME IS VALID,<br />NOW YOUR PRIVATE ROOM IS ' + data.room + '<br />',
+				'listautenti' : listautenti
 			});
 socket.broadcast.to(data.room).emit('suonacampser', data);
+socket.broadcast.to(data.room).emit('listautentiser', {
+							'listautenti' : listautenti		
+									});
 
 }  else {
-		socket.join('public');	
+//		socket.join('public');	
+socket.nickname = data.usernamerem;		
  console.log('ERRORE STANZA');
+// console.log (Object.keys(io.sockets.manager.rooms));
 	socket.emit('setuproomserKO', {
 				'room' : 'public',
 				'inforoom' : 'YOUR ROOM NAME IS NOT VALID,   REMEMBER TO USE AT LEAST THREE CHARACTERS OF TYPE ONLY LETTERS AND/OR NUMBERS, NOTHING ELSE.  NOW YOUR ROOM IS PUBLIC'
-			}); 	
+			}); 
+ var roster = io.sockets.clients('public');
+var listautenti = '';
+roster.forEach(function(client) {
+listautenti =	listautenti +  client.nickname + '<br />';
+}); 
+console.log (listautenti +'tiutuitiuyu');
+listautenti = 'LIST USERS IN THIS ROOM: ' +  listautenti;	
+socket.broadcast.to(data.room).emit('listautentiser', {
+							'listautenti' : listautenti		
+									});
+
 }
 	});
 
