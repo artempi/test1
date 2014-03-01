@@ -4,7 +4,7 @@
   "dependencies":
   {
     "node-static" : "latest",
-    "socket.io" : ">= 0.9.6",
+    "socket.io" : ">= 0.9.6"
  },
   "engines": {
     "node": "0.10.26",
