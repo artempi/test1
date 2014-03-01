@@ -5,10 +5,9 @@
   {
     "node-static" : "latest",
     "socket.io" : ">= 0.9.6",
-"knox": "~0.3.1"
  },
   "engines": {
-    "node": "0.6.x",
+    "node": "0.10.26",
     "npm": "1.1.4"
   }
 }
