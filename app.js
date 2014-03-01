@@ -145,7 +145,6 @@ listautenti = 'LIST USERS IN THIS ROOM: ' +  listautenti;
 socket.broadcast.to(data.room).emit('listautentiser', {
 							'listautenti' : listautenti		
 									});
-
 }
 	});
 

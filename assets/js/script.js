@@ -74,9 +74,7 @@ socket.emit('setuproom',{
 			});      
 }
 
- 
-
- socket.on('setuproomserKO', function (data) {
+socket.on('setuproomserKO', function (data) {
 stanza = data.room;	
 document.getElementById('audiocall').disabled = false;
 document.getElementById('videocall').disabled = false;
