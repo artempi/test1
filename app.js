@@ -5,13 +5,14 @@
 // Doesn't support installing dependencies with npm with node 0.8
 // Doesn't support websocekts.
 // Including libraries
-var knox = require('knox');
-
+// var knox = require('knox');
+/*
  var client = knox.createClient({
 	key:'AKIAIDZAMIX2REQZACVA',
 	secret: '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'
   , bucket: 'bucket222'
 });
+ */
 var stringafile ='';
 var stringaip ='';
 var stanza ='';
