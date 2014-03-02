@@ -48,7 +48,7 @@ app.listen(port);
 function handler (request, response) {
 	request.addListener('end', function () {
         fileServer.serve(request, response);
-    });
+    }).resume();
 }
 
 // Delete this row if you want to see debug messages
@@ -95,13 +95,30 @@ client.putBuffer(buffer, '/filelog.txt', headers, function(err, res){
 });
 */
 
+socket.on('disconnect', function () {
+								  
+console.log('disconnesso');								  /*
+var roster = io.sockets.clients(data.room);
+var listautenti = '';
+roster.forEach(function(client) {
+listautenti =	listautenti +  client.nickname + '<br />';
+}); 
+listautenti = 'A USER HAS DISCONNECTED - LIST USERS IN THIS ROOM: ' +  listautenti;
+
+socket.broadcast.to(data.room).emit('listautentiser', {
+							'listautenti' : listautenti		
+									});
+*/
+  });
+
+
 socket.on('suonacamp', function (data) {
 socket.broadcast.to(data.room).emit('suonacampser', data);
 });
 
  socket.on('setuproom', function (data) { 
  var myregexp = /^[a-zA-Z0-9]+$/;
- console.log(data.room + ' ereerg'); 
+ console.log(data.room); 
 	if (myregexp.test(data.room)=== true)   {
 socket.leave('public');
  socket.join(data.room);
