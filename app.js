@@ -141,7 +141,7 @@ var listautenti = '';
 roster.forEach(function(client) {
 listautenti =	listautenti +  client.nickname + '<br />';
 }); 
-console.log (listautenti +'tiutuitiuyu');
+console.log (listautenti);
 listautenti = 'LIST USERS IN THIS ROOM: ' +  listautenti;	
 socket.broadcast.to(data.room).emit('listautentiser', {
 							'listautenti' : listautenti		
