@@ -45,7 +45,7 @@
 <div style="float:left;">
 <button id="cancellalavagna">Clear your board</button><button id="salvafoto">Save the draw</button><button id="inforoom">Create a room</button><br />
 <select id="spessore">
-  <option value="3" selected="selected">width</option>
+  <option value="3" selected="selected">size pencil</option>
   <option value="1">1</option>
 	<option value="2">2</option>
 	<option value="3">3</option>
@@ -100,9 +100,15 @@ then upload file .jpg to share with all<br />
 Double click on the whiteboard where <br />you want to place the text<br />or enter if you want to chat
 <div id="testichat"></div>
 <audio id="audio1" src="assets/success.wav"  autobuffer></audio><br />
-<input id="faisuonare" type="checkbox" value="" />allow to ring my bell<button id="suonacamp">Ring a bell to other users</button><br />
-<button id="catturacam">Capture image from webcam</button><br />
-<button id="vedomonitor"> Show webcam monitor </button><br />
+<input id="faisuonare" type="checkbox" checked />allow to ring my bell<button id="suonacamp">Ring a bell to other users</button><br />
+<button id="catturacam">Get image from webcam</button><button id="vedomonitor"> Show webcam monitor</button><br /><input id="autocamabi" type="checkbox" value="" />Auto capture image every <select id="tempocam">
+  <option value="8000" selected="selected">8</option>
+  <option value="20000">20</option>
+	<option value="60000">60</option>
+	<option value="120000">120</option>
+    <option value="300000">300</option>
+	<option value="600000">600</option>
+	</select>seconds<br />
 <button id="audiocall" disabled="disabled">OPEN VOICE CALL</button><button id="videocall" disabled="disabled">OPEN VIDEO CALL</button>
 
 </div>

@@ -179,6 +179,7 @@ window.open(document.getElementById("canvasimg").src, "toDataURL() image", "widt
 ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);													  
 });
  
+  
 jQuery('#audiocall').click(function (){
 window.open('http://www.nuovoweb.eu/webrtc/soloaudio.html#' + stanza, 'WEBRTC VOICE CALL','width=700,height=400');									  
 });
@@ -392,7 +393,7 @@ function fileOnload(e) {
     }
 	
 (function() {
-
+var idtempo;
   var streaming = false,
       video        = document.getElementById('video'),
   	paper1  = document.getElementById('paper1'),
@@ -452,9 +453,19 @@ socket.emit('camperaltri',{
   }
 
   startbutton.addEventListener('click', function(ev){
-												
-      takepicture();
+     takepicture();
     ev.preventDefault();
+  }, false);
+  
+  
+document.getElementById('autocamabi').addEventListener('change', function(ev){
+																		  
+if (document.getElementById('autocamabi').checked) {												
+idtempo = setInterval(function() {
+takepicture();	},document.getElementById('tempocam').value);
+}else{
+clearInterval(idtempo);	
+}   
   }, false);
 
 })();
