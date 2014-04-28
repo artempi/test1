@@ -460,11 +460,14 @@ socket.emit('camperaltri',{
   
 document.getElementById('autocamabi').addEventListener('change', function(ev){
 																		  
-if (document.getElementById('autocamabi').checked) {												
+if (document.getElementById('autocamabi').checked) {	
+document.getElementById('tempocam').disabled = true;
 idtempo = setInterval(function() {
-takepicture();	},document.getElementById('tempocam').value);
+takepicture();	
+},document.getElementById('tempocam').value);
 }else{
-clearInterval(idtempo);	
+clearInterval(idtempo);
+document.getElementById('tempocam').disabled = false;
 }   
   }, false);
 
