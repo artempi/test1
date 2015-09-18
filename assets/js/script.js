@@ -138,10 +138,12 @@ socket.emit('salvasulserver',{
 jQuery('#vedomonitor').click(function (){
 if(document.getElementById('monitorcam').style.display == 'none')   { 
 document.getElementById("monitorcam").style.display = 'block';
-document.getElementById('vedomonitor').innerHTML = ' Hide webcam monitor ';
+document.getElementById('vedomonitor').innerHTML = ' Hide webcam window ';
 } else  {
 document.getElementById('monitorcam').style.display = 'none';	
-document.getElementById('vedomonitor').innerHTML = ' Show webcam monitor ';
+document.getElementById('vedomonitor').innerHTML = ' Show webcam window ';
+delete Xpos;
+delete Ypos;
 }										  
 });
 
@@ -339,11 +341,11 @@ document.getElementById('frecce').style.backgroundColor ='#ffff00';
 	});
 	
 	// Remove inactive clients after 10 seconds of inactivity
-	
-	var totalOnline = 0;
-	
+
+var totalOnline = 0;
+
     setInterval(function(){
-        var totalOnline = 0;
+        totalOnline = 0;
         for(var ident in clients){
             if(jQuery.now() - clients[ident].updated > 300000){
 
@@ -358,7 +360,7 @@ document.getElementById('frecce').style.backgroundColor ='#ffff00';
 			 totalOnline++;			
         }}
         jQuery('#onlineCounter').html('Users connected: '+totalOnline);
-    },5000);
+    },16000);
 //// end setinterval function ****************************
 	function drawLine(fromx, fromy, tox, toy){
 		ctx.strokeStyle = $('#minicolore').minicolors('rgbaString');
@@ -442,6 +444,8 @@ var idtempo;
   }, false);
 
 
+console.log(totalOnline);
+
 if (totalOnline > 0) {
     newX = 1000;
     newY = (totalOnline-1)*240;
@@ -455,7 +459,7 @@ console.log(newY);
   function takepicture1(e) {
 // ctx.drawImage(video, 0, 0,320,240);
 ctx.drawImage(video, newX, newY,320,240);
-ctx1.drawImage(video,newX, newY,320,240);
+ctx1.drawImage(video,0,0,320,240);
 var datacam = paper1.toDataURL('image/png');
 // paper1 e ctx1 servono per prelevare solo i dati della webcam e inviarli al server per gli altri	
 socket.emit('camperaltri',{
@@ -470,7 +474,7 @@ socket.emit('camperaltri',{
     function takepicture2(e) {
 // ctx.drawImage(video, 400, 0, 320,240);
 ctx.drawImage(video, Xpos, Ypos, 320,240);
-ctx1.drawImage(video,Xpos, Ypos,320,240);
+ctx1.drawImage(video,0,0,320,240);
 var datacam = paper1.toDataURL('image/png');
 // paper1 e ctx1 servono per prelevare solo i dati della webcam e inviarli al server per gli altri	
 socket.emit('camperaltri',{
@@ -484,11 +488,18 @@ socket.emit('camperaltri',{
 
 //  setInterval(function (ev) {takepicture1()}, 50);
 
-  startbutton.addEventListener('click', function(ev){
+
+
+
+
+ 
+
+ startbutton.addEventListener('click', function(ev){
      takepicture2();
+// Xpos=null;
+// Ypos=null;
     ev.preventDefault();
   }, false);
-  
 
 
 document.getElementById('autocamabi').addEventListener('change', function(ev){
@@ -507,5 +518,3 @@ clearInterval(idtempo);
 })();
 
 });
-
-	
