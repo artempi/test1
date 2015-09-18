@@ -14,7 +14,7 @@ jQuery(function(){
 stanza  = location.href.substring(location.href.indexOf('#')+1);
  }
 	
-	var positionx ='230';
+	var positionx ='23';
 	var positiony='0';
 
 	var doc = jQuery(document),
@@ -209,7 +209,7 @@ var camdaclient = new Image();
 camdaclient.src = data.camperaltridati;
 camdaclient.onload = function() {
 //	imgdaclient.src = data.fileperaltri;
-ctx.drawImage(camdaclient,data.positionx,data.positiony,320,240);
+ctx.drawImage(camdaclient,data.positionx,data.positiony,32,24);
 }
 });	
  
