@@ -342,9 +342,9 @@ document.getElementById('frecce').style.backgroundColor ='#ffff00';
     setInterval(function(){
         var totalOnline = 0;
         for(var ident in clients){
-            if(jQuery.now() - clients[ident].updated > 16000){
+            if(jQuery.now() - clients[ident].updated > 300000){
 
-                // Last update was more than 10 seconds ago.
+                // Last update was more than 300 seconds ago.
                 // This user has probably closed the page
 
                 cursors[ident].remove();
@@ -438,8 +438,33 @@ var idtempo;
 		  
   }, false);
 
-  function takepicture(e) {
- ctx.drawImage(video, positionx, positiony,320,240);
+var newX = 0;
+var newy = 0;
+
+if (totalOnline > 1) {
+    newX = 1000;
+    newY = (totalOnline-2)*240;
+}
+
+
+  function takepicture1(e) {
+// ctx.drawImage(video, 0, 0,320,240);
+ctx.drawImage(video, newX, newY,320,240);
+ctx1.drawImage(video,0,0,320,240);
+var datacam = paper1.toDataURL('image/png');
+// paper1 e ctx1 servono per prelevare solo i dati della webcam e inviarli al server per gli altri	
+socket.emit('camperaltri',{
+				'id': id,
+				'positionx': 0,
+				'positiony': 0,
+				'camperaltridati':  datacam,
+				'room' : stanza
+				});			 
+  }
+
+    function takepicture2(e) {
+// ctx.drawImage(video, 400, 0, 320,240);
+ctx.drawImage(video, Xpos, Ypos, 320,240);
 ctx1.drawImage(video,0,0,320,240);
 var datacam = paper1.toDataURL('image/png');
 // paper1 e ctx1 servono per prelevare solo i dati della webcam e inviarli al server per gli altri	
@@ -452,22 +477,25 @@ socket.emit('camperaltri',{
 				});			 
   }
 
+//  setInterval(function (ev) {takepicture1()}, 50);
+
   startbutton.addEventListener('click', function(ev){
-     takepicture();
+     takepicture2();
     ev.preventDefault();
   }, false);
   
-  
+
+
 document.getElementById('autocamabi').addEventListener('change', function(ev){
 																		  
 if (document.getElementById('autocamabi').checked) {	
-document.getElementById('tempocam').disabled = true;
+//document.getElementById('tempocam').disabled = true;
 idtempo = setInterval(function() {
-takepicture();	
-},document.getElementById('tempocam').value);
+takepicture1();	
+}, 50);
 }else{
 clearInterval(idtempo);
-document.getElementById('tempocam').disabled = false;
+//document.getElementById('tempocam').disabled = false;
 }   
   }, false);
 
