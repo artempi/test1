@@ -339,6 +339,9 @@ document.getElementById('frecce').style.backgroundColor ='#ffff00';
 	});
 	
 	// Remove inactive clients after 10 seconds of inactivity
+	
+	var totalOnline = 0;
+	
     setInterval(function(){
         var totalOnline = 0;
         for(var ident in clients){
@@ -438,12 +441,14 @@ var idtempo;
 		  
   }, false);
 
-var newX = 0;
-var newy = 0;
 
-if (totalOnline > 1) {
+if (totalOnline > 0) {
     newX = 1000;
-    newY = (totalOnline-2)*240;
+    newY = (totalOnline-1)*240;
+console.log(newY);
+} else {
+    newX = 0;
+    newY = 0;
 }
 
 
