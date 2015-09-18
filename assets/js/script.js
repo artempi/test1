@@ -14,7 +14,7 @@ jQuery(function(){
 stanza  = location.href.substring(location.href.indexOf('#')+1);
  }
 	
-	var positionx ='23';
+	var positionx ='230';
 	var positiony='0';
 
 	var doc = jQuery(document),
