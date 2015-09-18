@@ -28,14 +28,16 @@
 		
 	<script type="text/javascript">	
 
-var Xpos;
-var Ypos;
+// Xpos=0;
+// Ypos=0;
 
 		$(document).ready(function() {
 	$("#monitorcam").draggable({ cursor: "move", drag: function() {
         var offset = $(this).offset();
         var xPos = offset.left;
         var yPos = offset.top;
+console.log(xPos);
+console.log(yPos);
 Xpos = xPos;
 Ypos = yPos;
     }
@@ -191,7 +193,7 @@ Double click on the whiteboard where <br />you want to post the text<br />or pre
         </footer>
         
         <!-- JavaScript includes. Notice that socket.io.js is served by node.js -->
-		<script src="/socket.io/socket.io.js"></script>   
+		<script src="/socket.io/socket.io.js"></script    
 	<script src="assets/js/script.js"></script>
     </body>
 </html>         
