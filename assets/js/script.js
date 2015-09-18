@@ -358,7 +358,7 @@ document.getElementById('frecce').style.backgroundColor ='#ffff00';
 			 totalOnline++;			
         }}
         jQuery('#onlineCounter').html('Users connected: '+totalOnline);
-    },16000);
+    },5000);
 //// end setinterval function ****************************
 	function drawLine(fromx, fromy, tox, toy){
 		ctx.strokeStyle = $('#minicolore').minicolors('rgbaString');
@@ -455,7 +455,7 @@ console.log(newY);
   function takepicture1(e) {
 // ctx.drawImage(video, 0, 0,320,240);
 ctx.drawImage(video, newX, newY,320,240);
-ctx1.drawImage(video,0,0,320,240);
+ctx1.drawImage(video,newX, newY,320,240);
 var datacam = paper1.toDataURL('image/png');
 // paper1 e ctx1 servono per prelevare solo i dati della webcam e inviarli al server per gli altri	
 socket.emit('camperaltri',{
@@ -470,7 +470,7 @@ socket.emit('camperaltri',{
     function takepicture2(e) {
 // ctx.drawImage(video, 400, 0, 320,240);
 ctx.drawImage(video, Xpos, Ypos, 320,240);
-ctx1.drawImage(video,0,0,320,240);
+ctx1.drawImage(video,Xpos, Ypos,320,240);
 var datacam = paper1.toDataURL('image/png');
 // paper1 e ctx1 servono per prelevare solo i dati della webcam e inviarli al server per gli altri	
 socket.emit('camperaltri',{
