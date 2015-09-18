@@ -479,8 +479,8 @@ var datacam = paper1.toDataURL('image/png');
 // paper1 e ctx1 servono per prelevare solo i dati della webcam e inviarli al server per gli altri	
 socket.emit('camperaltri',{
 				'id': id,
-				'positionx': positionx,
-				'positiony': positiony,
+				'positionx': 0,
+				'positiony': 0,
 				'camperaltridati':  datacam,
 				'room' : stanza
 				});			 
