@@ -1,5 +1,8 @@
-<!DOCTYPE html>
+
+        
+        <!DOCTYPE html>
 <head>
+<!--
 <meta name="google-site-verification" content="WC9FfWNfVRyJn8pWPXTHM4uCe_p-U13-iz0dV8A6puk" />
 <meta charset="utf-8"/>
 <meta property="og:site_name" content="Real time white board for drawing on line, share photo and capture image from webcam"/>
@@ -12,7 +15,8 @@
 <meta name="description" content="lavagna multiutente condivisa in tempo reale, multiuser whiteboard real time application, draw on line and share your draw with all on the net" />
 
         <meta charset="utf-8" />
-        <title>Real time whiteboard collaborative multicolor multiusers with chat and upload images</title>
+-->
+        <title>Whiteboard</title>
 
         <!-- The stylesheets -->
         <link rel="stylesheet" href="assets/css/styles.css" />
@@ -25,15 +29,28 @@
         <![endif]-->
 		
 	<script type="text/javascript">	
+
+var Xpos;
+var Ypos;
+
 		$(document).ready(function() {
-	$("#monitorcam").draggable({ cursor: "move" });			
+	$("#monitorcam").draggable({ cursor: "move", drag: function() {
+        var offset = $(this).offset();
+        var xPos = offset.left;
+        var yPos = offset.top;
+Xpos = xPos;
+Ypos = yPos;
+    }
+ });
+
+			
 	document.getElementById('monitorcam').style.display ='none';	
 	$('#minicolore').minicolors(
 	{
 	opacity:true
 	}
 	);	
-	});	
+	});
 	
 	
 	
@@ -43,20 +60,24 @@
 	<div id="monitorcam" title="drag and drop this monitor" alt="drag and drop this monitor"><video id="video" style="width:320px;height:240px;" autoplay></video></div>	
 <div id="controlli">	
 <div style="float:left;">
-<button id="cancellalavagna">Clear your board</button><button id="salvafoto">Save the draw</button><button id="inforoom">Create a room</button><br />
+<button id="cancellalavagna">Clear the board</button><button id="salvafoto">Save the board</button>
+<!--
+<button id="inforoom">Create a room</button>
+-->
+<br />
 <select id="spessore">
   <option value="3" selected="selected">size pencil</option>
   <option value="1">1</option>
-	<option value="2">2</option>
+<!--	<option value="2">2</option> -->
 	<option value="3">3</option>
-    <option value="4">4</option>
+<!--    <option value="4">4</option> -->
 	<option value="5">5</option>
-	<option value="6">6</option>
+<!--	<option value="6">6</option>
 	<option value="7">7</option>
 	<option value="8">8</option>
-<option value="9">9</option>
+<option value="9">9</option> -->
 <option value="10">10</option>
-<option value="11">11</option>
+<!--<option value="11">11</option>
 <option value="12">12</option>
 <option value="13">13</option>
 <option value="13">14</option>
@@ -64,8 +85,11 @@
 <option value="16">16</option>
 <option value="17">17</option>
 <option value="18">18</option>
-<option value="19">19</option>
+<option value="19">19</option>-->
 <option value="20">20</option>
+<option value="40">40</option>
+<option value="80">80</option>
+<option value="160">160</option>
 </select>	
 <input type="text" class="minicolors" id="minicolore" value="#000000" data-opacity="1.0" /><select id="fontsize">
   <option value="14" selected="selected">font size</option>
@@ -93,15 +117,18 @@
 <option value="29">29</option>
 <option value="30">30</option>
 </select><br />
-At first double click on the whiteboard<br />where you want to place your photo,<br />
-then upload file .jpg to share with all<br />
+Double click on the whiteboard<br />where you want to post a photo,<br />
+then upload .jpg file<br />
 <input type="file" id="file-input"> <br />
 <input type="text" id="scrivi" size="36" /> <br />
-Double click on the whiteboard where <br />you want to place the text<br />or enter if you want to chat
+Double click on the whiteboard where <br />you want to post the text<br />or press Enter to send a message
 <div id="testichat"></div>
 <audio id="audio1" src="assets/success.wav"  autobuffer></audio><br />
-<input id="faisuonare" type="checkbox" checked />allow to ring my bell<button id="suonacamp">Ring a bell to other users</button><br />
-<button id="catturacam">Get image from webcam</button><button id="vedomonitor"> Show webcam monitor</button><br /><input id="autocamabi" type="checkbox" value="" />Auto capture image every <select id="tempocam">
+<input id="faisuonare" type="checkbox" checked />Notify me<button id="suonacamp">Notify other users</button><br />
+<button id="catturacam">Post from webcam</button><button id="vedomonitor">Show webcam window</button><br /><input id="autocamabi" type="checkbox" value="" />Allow video 
+
+<!--
+<select id="tempocam">
 <option value="1000">1</option>
 <option value="2000">2</option>
 <option value="4000">4</option>
@@ -111,7 +138,10 @@ Double click on the whiteboard where <br />you want to place the text<br />or en
 	<option value="120000">120</option>
     <option value="300000">300</option>
 	<option value="600000">600</option>
-	</select>seconds<br />
+	</select>seconds
+-->
+
+<br />
 <button id="audiocall" disabled="disabled">OPEN VOICE CALL</button><button id="videocall" disabled="disabled">OPEN VIDEO CALL</button>
 
 </div>
@@ -133,16 +163,22 @@ Double click on the whiteboard where <br />you want to place the text<br />or en
 		
 	<canvas id="paper1" style="display:none;" width="320" height="240"> </canvas>
 		<hgroup id="instructions">		
-			<h1>Draw anywhere!</h1> 
-			<h2>You will see everyone else who's doing the same.</h2>
-			<h3>If you like this web application please click the button LIKE at the bottom of this page</h3>
+			<h1>Welcome to whiteboard!</h1> 
+			<h2>You now may start drawing and chat.</h2>
+<!--			<h3>If you like this web application please click the button LIKE at the bottom of this page</h3>
+-->
 		</hgroup>
 		
         <footer>
-				
+
+<!--	
 	        <h2><a href="mailto:vrobbi@libero.it" target='_blank'>send me a mail if you want to customer this app</a>&nbsp;&nbsp;&nbsp;<a href="http://www.nuovoweb.eu" target="_blank">www.nuovoweb.eu</a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/vrobbi/whiteboard
 " target="_blank">sources on github</a></h2>
+-->
+
             <p class='tzine' id='onlineCounter' href=''>Users connected: 0</p>
+
+<!--
 <div id="fb-root" style="position:absolute;left:0px;bottom:-10px;width:100px;height:auto;"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -152,10 +188,12 @@ Double click on the whiteboard where <br />you want to place the text<br />or en
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <div class="fb-like" data-href="http://vrobbi-nodedrawing.herokuapp.com" data-send="false" data-width="210" data-show-faces="true" data-font="arial"></div>
+-->
+
         </footer>
         
         <!-- JavaScript includes. Notice that socket.io.js is served by node.js -->
-		<script src="/socket.io/socket.io.js"></script>    
+		<script src="/socket.io/socket.io.js"></script>   
 	<script src="assets/js/script.js"></script>
     </body>
 </html>         
