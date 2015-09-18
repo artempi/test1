@@ -209,7 +209,7 @@ var camdaclient = new Image();
 camdaclient.src = data.camperaltridati;
 camdaclient.onload = function() {
 //	imgdaclient.src = data.fileperaltri;
-ctx.drawImage(camdaclient,data.positionx,data.positiony,32,24);
+ctx.drawImage(camdaclient,data.positionx,data.positiony,320,240);
 }
 });	
  
@@ -464,8 +464,8 @@ var datacam = paper1.toDataURL('image/png');
 // paper1 e ctx1 servono per prelevare solo i dati della webcam e inviarli al server per gli altri	
 socket.emit('camperaltri',{
 				'id': id,
-				'positionx': positionx,
-				'positiony': positiony,
+				'positionx': newX,
+				'positiony': newY,
 				'camperaltridati':  datacam,
 				'room' : stanza
 				});			 
@@ -479,8 +479,8 @@ var datacam = paper1.toDataURL('image/png');
 // paper1 e ctx1 servono per prelevare solo i dati della webcam e inviarli al server per gli altri	
 socket.emit('camperaltri',{
 				'id': id,
-				'positionx': 0,
-				'positiony': 0,
+				'positionx': Xpos,
+				'positiony': Ypos,
 				'camperaltridati':  datacam,
 				'room' : stanza
 				});			 
