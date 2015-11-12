@@ -137,7 +137,7 @@ listautenti = 'LIST USERS IN THIS ROOM: ' +  listautenti;
  
 socket.emit('setuproomser', {
 			'room' :  data.room,
-				'inforoom' : 'YOUR ROOM NAME IS VALID,<br />NOW YOUR PRIVATE ROOM IS ' + data.room + '<br />',
+				'inforoom' : 'YOUR ROOM NAME IS VALID,<br />NOW YOUR PRIVATE ROOM IS ' + 'haha' + '<br />',
 				'listautenti' : listautenti
 			});
 socket.broadcast.to(data.room).emit('suonacampser', data);
