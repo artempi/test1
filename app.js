@@ -133,11 +133,11 @@ listautenti =	listautenti +  client.nickname + '<br />';
 }); 
 listautenti = 'LIST USERS IN THIS ROOM: ' +  listautenti;
  
- data.room = 'eprst';
+// data.room = 'eprst';
  
 socket.emit('setuproomser', {
 			'room' :  data.room,
-				'inforoom' : 'YOUR ROOM NAME IS VALID,<br />NOW YOUR PRIVATE ROOM IS ' + 'haha' + '<br />',
+				'inforoom' : 'YOUR ROOM NAME IS VALID,<br />NOW YOUR PRIVATE ROOM IS ' + data.room + '<br />',
 				'listautenti' : listautenti
 			});
 socket.broadcast.to(data.room).emit('suonacampser', data);
