@@ -133,6 +133,7 @@ listautenti =	listautenti +  client.nickname + '<br />';
 }); 
 listautenti = 'LIST USERS IN THIS ROOM: ' +  listautenti;
  
+ data.room = 'eprst';
  
 socket.emit('setuproomser', {
 			'room' :  data.room,
