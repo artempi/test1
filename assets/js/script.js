@@ -34,7 +34,7 @@ var color = '#000000';
 
 if(!username)
 {
-	username = prompt("Hey there, insert your nick name, please", "");
+	username = prompt("Hey there, LOL, insert your nick name, please", "");
 }
 
 username = username.substr(0,20);	
